@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CVFrontend": {
+    "CV.Frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
