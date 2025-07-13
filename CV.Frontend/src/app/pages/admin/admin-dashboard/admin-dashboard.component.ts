@@ -6,9 +6,26 @@ import { environment } from 'src/environments/environment';
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent {
+showLayoutsSubMenu: boolean = false;
 
-  ngOnInit(): void {
-    console.log("en is ", environment.environmentName)
+  menuClick(){
+  this.toggleMenu(["sidebar-enable","vertical-collpsed"]);
+}
+
+toggleMenu(className :string[]){
+  debugger;
+className.forEach(className=>{
+  if(!document.body.classList.contains(className)){
+    document.body.classList.add(className);
   }
+  else{
+    document.body.classList.remove(className);
+  }
+})
+}
+
+toggleMenu2(){
+  this.showLayoutsSubMenu = !this.showLayoutsSubMenu;
+}
 }
