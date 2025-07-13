@@ -54,6 +54,8 @@
 			{	"inject": true, "bundleName": "parsley","input": "src/assets/libs/parsleyjs/parsley.min.js"},
 			{	"inject": true, "bundleName": "form-validation","input": "src/assets/js/pages/form-validation.init.js"},
 			{	"inject": true, "bundleName": "select-2","input": "src/assets/libs/select2/js/select2.min.js"},
+      { "inject": true, "bundleName": "apexcharts", "input": "src/assets/libs/apexcharts/apexcharts.min.js" },
+      { "inject": true, "bundleName": "dashboard-init", "input": "src/assets/js/pages/dashboard.init.js" },
 			{	"inject": true, "bundleName": "app","input": "src/assets/js/app.js"}
             ]
           },
