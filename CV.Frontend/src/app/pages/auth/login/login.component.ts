@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  constructor(private authService:AuthenticationService){
+    console.log("ttt", authService.getAllClaims())
+  }
 }

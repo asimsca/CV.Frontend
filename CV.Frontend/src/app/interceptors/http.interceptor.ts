@@ -25,10 +25,10 @@ import {
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoaderService } from '../shared/services/loader.service';
-import { RefreshTokenRequest } from '../models/dto/request/refresh-token-request';
+import { RefreshTokenRequest } from '../models/dto/request/user-management/refresh-token-request';
 import { RefreshTokenResponse } from '../models/dto/response/user-management/refresh-token-response';
 import { SweetAlertService } from '../shared/services/sweet-alert.service';
-import { LogoutRequest } from '../models/dto/request/logout-request';
+import { LogoutRequest } from '../models/dto/request/user-management/logout-request';
 import { AuthenticationService } from '../services/auth/authentication.service';
 import { BaseResponse } from '../models/base-response';
 @Injectable()
@@ -44,8 +44,8 @@ export class HttpInterceptor {
     this.UUID = this.cookieService.get('browserUUID');
   }
   private requestCount = 0;
-  private sessionId: string;
-  private userId: string;
+  private sessionId: string = "";
+  private userId: string = "";
   isRefreshingToken: boolean = false;
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   UUID: any;
@@ -150,7 +150,7 @@ private Logout(){
   ): HttpRequest<any> {
     return request.clone({
       setHeaders: {
-        Authorization: Bearer ${token},
+        Authorization: 'Bearer ${token}',
         Platform: '1',
         UUID: this.UUID,
       },
@@ -170,7 +170,7 @@ private Logout(){
       return this.authService.refreshAccessToken(refTokenObj).pipe(
         switchMap((resp: BaseResponse<RefreshTokenResponse>) => {
           this.isRefreshingToken = false;
-          if (resp.isSuccessful) {
+          if (resp.isSuccess) {
             this.authService.JwtToken = resp.data.updatedAccessToken;
             this.authService.refreshToken = resp.data.updatedRefreshToken;
             this.tokenSubject.next(resp.data.updatedAccessToken);

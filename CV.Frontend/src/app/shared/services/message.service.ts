@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { MessageEnum } from 'src/app/enums/message-enum';
+import { MessageEnum } from 'src/app/enums/message.enum';
 @Injectable({ providedIn: 'root' })
 
 export class MessageService {

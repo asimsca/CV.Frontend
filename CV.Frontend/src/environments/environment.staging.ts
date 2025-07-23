@@ -1,5 +1,5 @@
 export const environment = {
     production : false,
     environmentName : 'staging',
-    baseApiUrl: 'http://dummy-api.staging/api'
+    baseAPIUrl: 'http://dummy-api.staging/api'
 }
