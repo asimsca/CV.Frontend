@@ -102,11 +102,11 @@ export class AuthenticationService {
 
   login(
     loginRequest: LoginRequest
-  ): Observable<LoginResponse> {
-    const uri = `${this.baseAPIUrl}/authenticator/login`;
+  ): Observable<BaseResponse<LoginResponse>> {
+    const uri = `${this.baseAPIUrl}/Auth/login`;
     return this.http
-      .post<LoginResponse>(uri, loginRequest)
-      .pipe(map((data) => <LoginResponse>data));
+      .post<BaseResponse<LoginResponse>>(uri, loginRequest)
+      .pipe(map((data) => <BaseResponse<LoginResponse>>data));
   }
 
   authorizeOTP(
