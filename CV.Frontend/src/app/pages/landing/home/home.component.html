@@ -1,131 +1,127 @@
 <header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">CVBuilder</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarMenu"
-      aria-controls="navbarMenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">CVBuilder</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarMenu">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/features" routerLinkActive="active">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/pricing" routerLinkActive="active">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/faq" routerLinkActive="active">FAQ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
-        </li>
-      </ul>
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/" fragment="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" fragment="features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" fragment="pricing">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" fragment="faq">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" fragment="contact">Contact</a>
+                </li>
+            </ul>
+
+        </div>
     </div>
-  </div>
 </header>
-
 
 <!-- index.html or landing.component.html -->
 <div class="container py-5">
-  <!-- Hero Section -->
-  <div class="text-center mb-5">
-    <h1 class="display-4 fw-bold">Create a Professional CV in Minutes</h1>
-    <p class="lead">✅ AI-Optimized &bull; ✅ ATS-Friendly &bull; ✅ Only $2 to Download</p>
-    <a routerLink="/auth/register" class="btn btn-primary btn-lg mt-3">Build My CV Now</a>
-  </div>
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Create a Professional CV in Minutes</h1>
+        <p class="lead">✅ AI-Optimized &bull; ✅ ATS-Friendly &bull; ✅ Only $2 to Download</p>
+        <a routerLink="/auth/register" class="btn btn-primary btn-lg mt-3">Build My CV Now</a>
+    </div>
 
-  <!-- Features -->
-  <div class="row text-center mb-5">
-    <div class="col-md-4">
-      <h5>📄 Professionally Designed Templates</h5>
-      <p>Modern and clean formats that get attention.</p>
+    <!-- Features -->
+    <div class="row text-center mb-5">
+        <div class="col-md-4">
+            <h5>📄 Professionally Designed Templates</h5>
+            <p>Modern and clean formats that get attention.</p>
+        </div>
+        <div class="col-md-4">
+            <h5>🧠 AI Suggestions & Guidance</h5>
+            <p>Optimize your wording and skills automatically.</p>
+        </div>
+        <div class="col-md-4">
+            <h5>📥 Instant Download</h5>
+            <p>Get PDF or Word file instantly after payment.</p>
+        </div>
     </div>
-    <div class="col-md-4">
-      <h5>🧠 AI Suggestions & Guidance</h5>
-      <p>Optimize your wording and skills automatically.</p>
-    </div>
-    <div class="col-md-4">
-      <h5>📥 Instant Download</h5>
-      <p>Get PDF or Word file instantly after payment.</p>
-    </div>
-  </div>
 
-  <!-- Screenshot Demo -->
-  <div class="text-center mb-5">
-    <img src="assets/images/cv-preview.png" alt="CV Preview" class="img-fluid rounded shadow" style="max-height: 400px;">
-  </div>
+    <!-- Screenshot Demo -->
+    <div class="text-center mb-5">
+        <img src="https://i.pinimg.com/736x/41/6d/78/416d787ff182dd12361c361fe919ccf9.jpg" alt="CV Preview"
+            class="img-fluid rounded shadow" style="max-height: 400px; width: 100%;">
+    </div>
 
-  <!-- Testimonials -->
-  <div class="row mb-5">
-    <div class="col-md-6">
-      <blockquote class="blockquote">
-        <p>"Got 3 interview calls within a week! Worth every cent."</p>
-        <footer class="blockquote-footer">Sarah M., UK</footer>
-      </blockquote>
+    <!-- Testimonials -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <blockquote class="blockquote">
+                <p>"Got 3 interview calls within a week! Worth every cent."</p>
+                <footer class="blockquote-footer">Sarah M., UK</footer>
+            </blockquote>
+        </div>
+        <div class="col-md-6">
+            <blockquote class="blockquote">
+                <p>"I’ve tried Canva and others, but this was easier and better."</p>
+                <footer class="blockquote-footer">Ali R., UAE</footer>
+            </blockquote>
+        </div>
     </div>
-    <div class="col-md-6">
-      <blockquote class="blockquote">
-        <p>"I’ve tried Canva and others, but this was easier and better."</p>
-        <footer class="blockquote-footer">Ali R., UAE</footer>
-      </blockquote>
-    </div>
-  </div>
 
-  <!-- Pricing Section -->
-  <div class="text-center mb-5">
-    <h2>Download Your CV — Only $2</h2>
-    <p>No subscriptions. One-time payment via secure checkout.</p>
-    <a routerLink="/auth/payment" class="btn btn-success btn-lg">Build My CV for $2</a>
-  </div>
+    <!-- Pricing Section -->
+    <div class="text-center mb-5">
+        <h2>Download Your CV — Only $2</h2>
+        <p>No subscriptions. One-time payment via secure checkout.</p>
+        <a routerLink="/auth/payment" class="btn btn-success btn-lg">Build My CV for $2</a>
+    </div>
 
-  <!-- FAQs -->
-  <div class="accordion mb-5" id="faqAccordion">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="faqOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-          Can I edit after payment?
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show">
-        <div class="accordion-body">Yes, you can come back and update your CV anytime.</div>
-      </div>
+    <!-- FAQs -->
+    <div class="accordion mb-5" id="faqAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                    Can I edit after payment?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">Yes, you can come back and update your CV anytime.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo">
+                    Is payment safe?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">100% secure via Stripe. We never store your card info.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree">
+                    Can I use it for different jobs?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse">
+                <div class="accordion-body">Yes! Create and download multiple versions easily.</div>
+            </div>
+        </div>
     </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="faqTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-          Is payment safe?
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse">
-        <div class="accordion-body">100% secure via Stripe. We never store your card info.</div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="faqThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-          Can I use it for different jobs?
-        </button>
-      </h2>
-      <div id="collapseThree" class="accordion-collapse collapse">
-        <div class="accordion-body">Yes! Create and download multiple versions easily.</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Final CTA -->
-  <div class="text-center">
-    <h3>Ready to Land Your Dream Job?</h3>
-    <a routerLink="/auth/register" class="btn btn-primary btn-lg mt-3">Build Your CV for $2 →</a>
-  </div>
+    <!-- Final CTA -->
+    <div class="text-center">
+        <h3>Ready to Land Your Dream Job?</h3>
+        <a routerLink="/auth/register" class="btn btn-primary btn-lg mt-3">Build Your CV for $2 →</a>
+    </div>
 </div>
