@@ -6,6 +6,7 @@ import { TemplatesComponent } from './templates/templates.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { LandingLayoutComponent } from './landing-layout/landing-layout.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     HomeComponent,
     AboutComponent,
     TemplatesComponent,
-    PricingComponent
+    PricingComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
