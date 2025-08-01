@@ -1,36 +1,38 @@
 <div class='landing-page'>
-      <header class="header">
-      <nav class="nav-container">
-        <div class="nav-content">
-          <div class="logo">
-            <h2>CV Builder</h2>
-          </div>
-          
-          <div class="nav-links" [class.nav-open]="isMenuOpen">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#templates" class="nav-link">Templates</a>
-            <a href="#features" class="nav-link">Features</a>
-            <a href="#pricing" class="nav-link">Pricing</a>
-            <a href="#about" class="nav-link">About</a>
-          </div>
-          
-          <div class="nav-actions">
-            <button class="btn btn-outline-secondary">Sign In</button>
-            <button class="btn btn-primary">Get Started</button>
-            <button class="mobile-menu-btn" (click)="toggleMenu()">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-          </div>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="nav-content">
+        <div class="logo">
+          <h2>CV Builder</h2>
         </div>
-      </nav>
-    </header>
-      <main>
-        <section class="hero" id="home">
+
+        <div class="nav-links" [class.nav-open]="isMenuOpen">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#templates" class="nav-link">Templates</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <a href="#about" class="nav-link">About</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn btn-outline-secondary">Sign In</button>
+          <button class="btn btn-primary">Get Started</button>
+          <button class="mobile-menu-btn" (click)="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" id="home">
       <div class="hero-video">
         <video autoplay muted loop playsinline>
-          <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761" type="video/mp4">
+          <source
+            src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761"
+            type="video/mp4">
         </video>
         <div class="video-overlay"></div>
       </div>
@@ -38,11 +40,11 @@
         <div class="hero-content">
           <div class="hero-text">
             <h1 class="hero-title">
-              Create Your Perfect CV in 
+              Create Your Perfect CV in
               <span class="highlight">Minutes</span>
             </h1>
             <p class="hero-subtitle">
-              Build professional, ATS-friendly resumes with our modern templates and AI-powered suggestions. 
+              Build professional, ATS-friendly resumes with our modern templates and AI-powered suggestions.
               Stand out from the crowd and land your dream job.
             </p>
             <div class="hero-actions">
@@ -93,7 +95,7 @@
       </div>
     </section>
 
-        <section class="templates" id="templates">
+    <section class="templates" id="templates">
       <div class="templates-container">
         <div class="section-header">
           <h2 class="section-title">Professional CV Templates</h2>
@@ -103,20 +105,14 @@
         </div>
 
         <div class="template-categories">
-          <button 
-            *ngFor="let category of categories" 
-            class="category-btn"
-            [class.active]="activeCategory === category"
+          <button *ngFor="let category of categories" class="category-btn" [class.active]="activeCategory === category"
             (click)="setActiveCategory(category)">
             {{ category }}
           </button>
         </div>
 
         <div class="templates-grid">
-          <div 
-            *ngFor="let template of filteredTemplates" 
-            class="template-card"
-            (click)="selectTemplate(template)">
+          <div *ngFor="let template of filteredTemplates" class="template-card" (click)="selectTemplate(template)">
             <div class="template-preview">
               <div class="template-mock" [ngClass]="template.style">
                 <div class="mock-header">
@@ -154,7 +150,7 @@
       </div>
     </section>
 
-        <section class="features" id="features">
+    <section class="features" id="features">
       <div class="features-container">
         <div class="section-header">
           <h2 class="section-title">Why Choose CVCraft?</h2>
@@ -190,67 +186,67 @@
         </div>
       </div>
     </section>
- 
-      </main>
-      <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <h3 class="brand-name">CVCraft</h3>
-            <p class="brand-description">
-              Create professional CVs that get you hired. Join thousands of job seekers who trust CVCraft.
-            </p>
-            <div class="social-links">
-              <a href="#" class="social-link">📱</a>
-              <a href="#" class="social-link">🐦</a>
-              <a href="#" class="social-link">💼</a>
-              <a href="#" class="social-link">📘</a>
-            </div>
-          </div>
 
-          <div class="footer-links">
-            <div class="link-group">
-              <h4 class="link-title">Product</h4>
-              <a href="#" class="footer-link">Templates</a>
-              <a href="#" class="footer-link">Features</a>
-              <a href="#" class="footer-link">Pricing</a>
-              <a href="#" class="footer-link">Examples</a>
-            </div>
-
-            <div class="link-group">
-              <h4 class="link-title">Resources</h4>
-              <a href="#" class="footer-link">CV Tips</a>
-              <a href="#" class="footer-link">Career Guide</a>
-              <a href="#" class="footer-link">Interview Prep</a>
-              <a href="#" class="footer-link">Blog</a>
-            </div>
-
-            <div class="link-group">
-              <h4 class="link-title">Company</h4>
-              <a href="#" class="footer-link">About Us</a>
-              <a href="#" class="footer-link">Contact</a>
-              <a href="#" class="footer-link">Careers</a>
-              <a href="#" class="footer-link">Press</a>
-            </div>
-
-            <div class="link-group">
-              <h4 class="link-title">Support</h4>
-              <a href="#" class="footer-link">Help Center</a>
-              <a href="#" class="footer-link">Privacy Policy</a>
-              <a href="#" class="footer-link">Terms of Service</a>
-              <a href="#" class="footer-link">Cookie Policy</a>
-            </div>
+  </main>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3 class="brand-name">CVCraft</h3>
+          <p class="brand-description">
+            Create professional CVs that get you hired. Join thousands of job seekers who trust CVCraft.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link">📱</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">💼</a>
+            <a href="#" class="social-link">📘</a>
           </div>
         </div>
 
-        <div class="footer-bottom">
-          <p class="copyright">© 2025 CVCraft. All rights reserved.</p>
-          <div class="footer-bottom-links">
-            <a href="#" class="bottom-link">Privacy</a>
-            <a href="#" class="bottom-link">Terms</a>
-            <a href="#" class="bottom-link">Cookies</a>
+        <div class="footer-links">
+          <div class="link-group">
+            <h4 class="link-title">Product</h4>
+            <a href="#" class="footer-link">Templates</a>
+            <a href="#" class="footer-link">Features</a>
+            <a href="#" class="footer-link">Pricing</a>
+            <a href="#" class="footer-link">Examples</a>
+          </div>
+
+          <div class="link-group">
+            <h4 class="link-title">Resources</h4>
+            <a href="#" class="footer-link">CV Tips</a>
+            <a href="#" class="footer-link">Career Guide</a>
+            <a href="#" class="footer-link">Interview Prep</a>
+            <a href="#" class="footer-link">Blog</a>
+          </div>
+
+          <div class="link-group">
+            <h4 class="link-title">Company</h4>
+            <a href="#" class="footer-link">About Us</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">Careers</a>
+            <a href="#" class="footer-link">Press</a>
+          </div>
+
+          <div class="link-group">
+            <h4 class="link-title">Support</h4>
+            <a href="#" class="footer-link">Help Center</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Cookie Policy</a>
           </div>
         </div>
       </div>
-    </footer>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2025 CVCraft. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#" class="bottom-link">Privacy</a>
+          <a href="#" class="bottom-link">Terms</a>
+          <a href="#" class="bottom-link">Cookies</a>
+        </div>
+      </div>
     </div>
+  </footer>
+</div>
