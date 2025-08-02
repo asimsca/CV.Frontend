@@ -133,9 +133,5 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
     }
   ];
 
-   isMenuOpen = false;
-
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
+ 
 }

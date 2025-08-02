@@ -1,27 +1,27 @@
-<header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="#">CVBuilder</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-            aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" routerLink="/" fragment="home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/templates">Templates</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/pricing">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/about">About</a>
-                </li>
-            </ul>
-
+  <header class="header">
+    <nav class="nav-container">
+      <div class="nav-content">
+        <div class="logo">
+          <h2>CV Builder</h2>
         </div>
-    </div>
-</header>
+
+        <div class="nav-links" [class.nav-open]="isMenuOpen">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#templates" class="nav-link">Templates</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <a href="#about" class="nav-link">About</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn btn-outline-primary">Sign In</button>
+          <!-- <button class="btn btn-primary">Get Started</button> -->
+          <button class="mobile-menu-btn" (click)="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>

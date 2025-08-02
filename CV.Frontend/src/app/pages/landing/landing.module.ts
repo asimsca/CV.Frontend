@@ -7,6 +7,7 @@ import { PricingComponent } from './pricing/pricing.component';
 import { LandingLayoutComponent } from './landing-layout/landing-layout.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
     AboutComponent,
     TemplatesComponent,
     PricingComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

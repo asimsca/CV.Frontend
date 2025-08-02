@@ -1,96 +1,167 @@
-<!-- index.html or landing.component.html -->
-<div class="container py-5">
-    <!-- Hero Section -->
-    <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold">Create a Professional CV in Minutes</h1>
-        <p class="lead">✅ AI-Optimized &bull; ✅ ATS-Friendly &bull; ✅ Only $2 to Download</p>
-        <a routerLink="/auth/register" class="btn btn-primary btn-lg mt-3">Build My CV Now</a>
-    </div>
-
-    <!-- Features -->
-    <div class="row text-center mb-5">
-        <div class="col-md-4">
-            <h5>📄 Professionally Designed Templates</h5>
-            <p>Modern and clean formats that get attention.</p>
-        </div>
-        <div class="col-md-4">
-            <h5>🧠 AI Suggestions & Guidance</h5>
-            <p>Optimize your wording and skills automatically.</p>
-        </div>
-        <div class="col-md-4">
-            <h5>📥 Instant Download</h5>
-            <p>Get PDF or Word file instantly after payment.</p>
-        </div>
-    </div>
-
-    <!-- Screenshot Demo -->
-    <div class="text-center mb-5">
-        <img src="https://i.pinimg.com/736x/41/6d/78/416d787ff182dd12361c361fe919ccf9.jpg" alt="CV Preview"
-            class="img-fluid rounded shadow" style="max-height: 400px; width: 100%;">
-    </div>
-
-    <!-- Testimonials -->
-    <div class="row mb-5">
-        <div class="col-md-6">
-            <blockquote class="blockquote">
-                <p>"Got 3 interview calls within a week! Worth every cent."</p>
-                <footer class="blockquote-footer">Sarah M., UK</footer>
-            </blockquote>
-        </div>
-        <div class="col-md-6">
-            <blockquote class="blockquote">
-                <p>"I’ve tried Canva and others, but this was easier and better."</p>
-                <footer class="blockquote-footer">Ali R., UAE</footer>
-            </blockquote>
-        </div>
-    </div>
-
-    <!-- Pricing Section -->
-    <div class="text-center mb-5">
-        <h2>Download Your CV — Only $2</h2>
-        <p>No subscriptions. One-time payment via secure checkout.</p>
-        <a routerLink="/auth/payment" class="btn btn-success btn-lg">Build My CV for $2</a>
-    </div>
-
-    <!-- FAQs -->
-    <div class="accordion mb-5" id="faqAccordion">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="faqOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                    Can I edit after payment?
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show">
-                <div class="accordion-body">Yes, you can come back and update your CV anytime.</div>
+<main>
+    <section class="hero" id="home">
+      <div class="hero-video">
+        <video autoplay muted loop playsinline>
+          <source
+            src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761"
+            type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">
+              Create Your Perfect CV in
+              <span class="highlight">Minutes</span>
+            </h1>
+            <p class="hero-subtitle">
+              Build professional, ATS-friendly resumes with our modern templates and AI-powered suggestions.
+              Stand out from the crowd and land your dream job.
+            </p>
+            <div class="hero-actions">
+              <button class="btn-primary-large">Start Building Now</button>
+              <button class="btn-secondary-large">View Templates</button>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="faqTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo">
-                    Is payment safe?
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse">
-                <div class="accordion-body">100% secure via Stripe. We never store your card info.</div>
+            <div class="hero-stats">
+              <div class="stat">
+                <span class="stat-number">50,000+</span>
+                <span class="stat-label">CVs Created</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Success Rate</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">4.9/5</span>
+                <span class="stat-label">User Rating</span>
+              </div>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="faqThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree">
-                    Can I use it for different jobs?
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse">
-                <div class="accordion-body">Yes! Create and download multiple versions easily.</div>
+          </div>
+          <div class="hero-image">
+            <div class="cv-preview">
+              <div class="cv-mock">
+                <div class="cv-header">
+                  <div class="cv-avatar"></div>
+                  <div class="cv-info">
+                    <div class="cv-name"></div>
+                    <div class="cv-title"></div>
+                    <div class="cv-contact"></div>
+                  </div>
+                </div>
+                <div class="cv-section">
+                  <div class="cv-section-title"></div>
+                  <div class="cv-section-line"></div>
+                  <div class="cv-section-line short"></div>
+                  <div class="cv-section-line"></div>
+                </div>
+                <div class="cv-section">
+                  <div class="cv-section-title"></div>
+                  <div class="cv-section-line"></div>
+                  <div class="cv-section-line short"></div>
+                </div>
+                <div class="cv-section">
+                  <div class="cv-section-title"></div>
+                  <div class="cv-section-line"></div>
+                  <div class="cv-section-line short"></div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- Final CTA -->
-    <div class="text-center">
-        <h3>Ready to Land Your Dream Job?</h3>
-        <a routerLink="/auth/register" class="btn btn-primary btn-lg mt-3">Build Your CV for $2 →</a>
-    </div>
-</div>
+    <section class="templates" id="templates">
+      <div class="templates-container">
+        <div class="section-header">
+          <h2 class="section-title">Professional CV Templates</h2>
+          <p class="section-subtitle">
+            Choose from our collection of modern, ATS-friendly templates designed by professionals
+          </p>
+        </div>
+
+        <div class="template-categories">
+          <button *ngFor="let category of categories" class="category-btn" [class.active]="activeCategory === category"
+            (click)="setActiveCategory(category)">
+            {{ category }}
+          </button>
+        </div>
+
+        <div class="templates-grid">
+          <div *ngFor="let template of filteredTemplates" class="template-card" (click)="selectTemplate(template)">
+            <div class="template-preview">
+              <div class="template-mock" [ngClass]="template.style">
+                <div class="mock-header">
+                  <div class="mock-avatar"></div>
+                  <div class="mock-info">
+                    <div class="mock-name"></div>
+                    <div class="mock-title"></div>
+                  </div>
+                </div>
+                <div class="mock-section">
+                  <div class="mock-section-title"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                </div>
+              </div>
+            </div>
+            <div class="template-info">
+              <h3 class="template-name">{{ template.name }}</h3>
+              <p class="template-description">{{ template.description }}</p>
+              <div class="template-badges">
+                <span class="badge ats" *ngIf="template.atsOptimized">ATS Optimized</span>
+                <span class="badge popular" *ngIf="template.popular">Popular</span>
+              </div>
+            </div>
+            <div class="template-overlay">
+              <button class="preview-btn">Preview</button>
+              <button class="use-btn">Use Template</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="templates-cta">
+          <button class="btn btn-primary">View All Templates</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="features-container">
+        <div class="section-header">
+          <h2 class="section-title">Why Choose CVCraft?</h2>
+          <p class="section-subtitle">
+            Everything you need to create a standout CV that gets you hired
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div *ngFor="let feature of features" class="feature-card">
+            <div class="feature-icon" [innerHTML]="feature.icon"></div>
+            <h3 class="feature-title">{{ feature.title }}</h3>
+            <p class="feature-description">{{ feature.description }}</p>
+          </div>
+        </div>
+
+        <div class="testimonials">
+          <h3 class="testimonials-title">What Our Users Say</h3>
+          <div class="testimonials-grid">
+            <div *ngFor="let testimonial of testimonials" class="testimonial-card">
+              <div class="testimonial-content">
+                <p class="testimonial-text">"{{ testimonial.text }}"</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">{{ testimonial.author.charAt(0) }}</div>
+                  <div class="author-info">
+                    <div class="author-name">{{ testimonial.author }}</div>
+                    <div class="author-role">{{ testimonial.role }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
