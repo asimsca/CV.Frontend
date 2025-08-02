@@ -1,0 +1,255 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "CV.Frontend": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cvfrontend",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/web.config"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css",
+              "src/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css",
+              "src/assets/libs/select2/css/select2.min.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/icons.min.css",
+              "src/assets/css/app.min.css"
+            ],
+            "scripts": [
+              {
+                "inject": true,
+                "bundleName": "jquery",
+                "input": "src/assets/libs/jquery/jquery.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "bootstrap",
+                "input": "src/assets/libs/bootstrap/js/bootstrap.bundle.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "metisMenu",
+                "input": "src/assets/libs/metismenu/metisMenu.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "simplebar",
+                "input": "src/assets/libs/simplebar/simplebar.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "waves",
+                "input": "src/assets/libs/node-waves/waves.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net/js/jquery.dataTables.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-buttons/js/buttons.print.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/js/pages/datatables.init.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "datatables",
+                "input": "src/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "jszip",
+                "input": "src/assets/libs/jszip/jszip.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "parsley",
+                "input": "src/assets/libs/parsleyjs/parsley.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "form-validation",
+                "input": "src/assets/js/pages/form-validation.init.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "select-2",
+                "input": "src/assets/libs/select2/js/select2.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "apexcharts",
+                "input": "src/assets/libs/apexcharts/apexcharts.min.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "dashboard-init",
+                "input": "src/assets/js/pages/dashboard.init.js"
+              },
+              {
+                "inject": true,
+                "bundleName": "app",
+                "input": "src/assets/js/app.js"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "CV.Frontend:build:production"
+            },
+            "development": {
+              "browserTarget": "CV.Frontend:build:development"
+            },
+            "staging": {
+              "browserTarget": "CV.Frontend:build:staging"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "CV.Frontend:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/web.config"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "./node_modules/primeflex/primeflex.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "be8fc377-bb51-4d47-a05d-ebe3289a225e"
+  }
+}
