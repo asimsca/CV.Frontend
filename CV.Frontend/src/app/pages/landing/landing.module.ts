@@ -14,7 +14,7 @@ const routes: Routes = [
     path: '',
     component: LandingLayoutComponent,  // ⬅️ Acts as a layout wrapper
     children: [
-      { path: '', redirectTo: 'pricing', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'pricing', component: PricingComponent },
