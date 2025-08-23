@@ -400,7 +400,7 @@ class HomeComponent {
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath: '../../../../assets/templatesImages/1.jpg'
+      mockImagePath: 'assets/templatesImages/1.jpg'
     }, {
       id: 2,
       name: 'Minimal Classic',
@@ -409,7 +409,7 @@ class HomeComponent {
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath: '../../../../assets/templatesImages/2.jpg'
+      mockImagePath: 'assets/templatesImages/2.jpg'
     }, {
       id: 3,
       name: 'Creative Designer',
@@ -418,7 +418,7 @@ class HomeComponent {
       style: 'creative',
       atsOptimized: false,
       popular: true,
-      mockImagePath: '../../../../assets/templatesImages/3.png'
+      mockImagePath: 'assets/templatesImages/3.png'
     }, {
       id: 4,
       name: 'Executive Leader',
@@ -427,7 +427,7 @@ class HomeComponent {
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath: '../../../../assets/templatesImages/4.jpg'
+      mockImagePath: 'assets/templatesImages/4.jpg'
     }, {
       id: 5,
       name: 'Tech Innovator',
@@ -436,7 +436,7 @@ class HomeComponent {
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath: '../../../../assets/templatesImages/7.png'
+      mockImagePath: 'assets/templatesImages/7.png'
     }, {
       id: 6,
       name: 'Simple Elegance',
@@ -445,7 +445,7 @@ class HomeComponent {
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath: '../../../../assets/templatesImages/6.jpg'
+      mockImagePath: 'assets/templatesImages/6.jpg'
     }];
     this.features = [{
       icon: '🚀',
