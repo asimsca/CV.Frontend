@@ -1,4 +1,4 @@
-<main>
+
     <section class="hero" id="home">
       <div class="hero-video">
         <video autoplay muted loop playsinline>
@@ -91,7 +91,7 @@
         <div class="templates-grid">
           <div *ngFor="let template of filteredTemplates" class="template-card" (click)="selectTemplate(template)">
             <div class="template-preview">
-              <div class="template-mock" [ngClass]="template.style">
+              <!-- <div class="template-mock" [ngClass]="template.style" *ngIf="!template.mockImagePath">
                 <div class="mock-header">
                   <div class="mock-avatar"></div>
                   <div class="mock-info">
@@ -104,7 +104,9 @@
                   <div class="mock-line"></div>
                   <div class="mock-line short"></div>
                 </div>
-              </div>
+              </div> -->
+              <img *ngIf="template.mockImagePath" src="{{template.mockImagePath}}" width="80%"> 
+              <!--  *ngIf="template.mockImagePath" will already check if it’s not empty / null / undefined. -->
             </div>
             <div class="template-info">
               <h3 class="template-name">{{ template.name }}</h3>
@@ -163,5 +165,3 @@
         </div>
       </div>
     </section>
-
-  </main>
