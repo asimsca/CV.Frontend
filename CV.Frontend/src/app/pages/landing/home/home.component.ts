@@ -12,13 +12,13 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
   templates = [
     {
       id: 1,
-      name: 'Modern Professional',
+      name: 'Modern Professional New',
       description: 'Clean and contemporary design perfect for tech professionals',
       category: 'Modern',
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath : '../../../../assets/templatesImages/1.jpg'
+      mockImagePath : 'assets/templatesImages/1.jpg'
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath : '../../../../assets/templatesImages/2.jpg'
+      mockImagePath : 'assets/templatesImages/2.jpg'
     },
     {
       id: 3,
@@ -38,7 +38,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'creative',
       atsOptimized: false,
       popular: true,
-      mockImagePath : '../../../../assets/templatesImages/3.png'
+      mockImagePath : 'assets/templatesImages/3.png'
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath : '../../../../assets/templatesImages/4.jpg'
+      mockImagePath : 'assets/templatesImages/4.jpg'
     },
     {
       id: 5,
@@ -58,7 +58,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath : '../../../../assets/templatesImages/7.png'
+      mockImagePath : 'assets/templatesImages/7.png'
     },
     {
       id: 6,
@@ -68,7 +68,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath : '../../../../assets/templatesImages/6.jpg'
+      mockImagePath : 'assets/templatesImages/6.jpg'
     }
   ];
 
