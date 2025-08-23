@@ -394,7 +394,7 @@ class HomeComponent {
     this.activeCategory = 'All';
     this.templates = [{
       id: 1,
-      name: 'Modern Professional',
+      name: 'Modern Professional New',
       description: 'Clean and contemporary design perfect for tech professionals',
       category: 'Modern',
       style: 'modern',
