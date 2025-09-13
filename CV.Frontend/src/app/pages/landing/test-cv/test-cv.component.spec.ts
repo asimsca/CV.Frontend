@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TestCVComponent } from './test-cv.component';
+
+describe('TestCVComponent', () => {
+  let component: TestCVComponent;
+  let fixture: ComponentFixture<TestCVComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestCVComponent]
+    });
+    fixture = TestBed.createComponent(TestCVComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,0 +1,223 @@
+<br>
+<div class="container mt-5">
+  <div class="cv-container">
+    <div class="edit-controls">
+      <button type="button" class="edit-btn" (click)="toggleEdit()">
+        {{ isEditing ? 'Preview' : 'Edit CV' }}
+      </button>
+    </div>
+
+    <form [formGroup]="cvForm" (ngSubmit)="onSubmit()" class="cv-form">
+      <div class="cv-layout">
+        <!-- Left Column -->
+        <div class="left-column">
+          <!-- Profile Section -->
+          <div class="profile-section" [formGroupName]="'personalInfo'">
+            <div class="profile-image-container">
+              <img 
+                [src]="cvForm.get('personalInfo.profileImage')?.value" 
+                alt="Profile Photo"
+                class="profile-image"
+                referrerpolicy="no-referrer">
+              <div *ngIf="isEditing" class="image-upload">
+                <input type="file" (change)="onImageChange($event)" accept="image/*" id="imageUpload">
+                <label for="imageUpload" class="upload-label">Change Photo</label>
+              </div>
+            </div>
+            
+            <div class="name-section">
+              <h1 *ngIf="!isEditing" class="name">{{ cvForm.get('personalInfo.name')?.value }}</h1>
+              <input *ngIf="isEditing" type="text" formControlName="name" class="name-input">
+              
+              <p *ngIf="!isEditing" class="position">{{ cvForm.get('personalInfo.position')?.value }}</p>
+              <input *ngIf="isEditing" type="text" formControlName="position" class="position-input">
+            </div>
+          </div>
+
+          <!-- Contact Section -->
+          <div class="section" [formGroupName]="'personalInfo'">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              Contact
+            </h2>
+            <div class="contact-info">
+              <div class="contact-item">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+                <span *ngIf="!isEditing">{{ cvForm.get('personalInfo.phone')?.value }}</span>
+                <input *ngIf="isEditing" type="text" formControlName="phone" class="contact-input">
+              </div>
+              
+              <div class="contact-item">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <span *ngIf="!isEditing">{{ cvForm.get('personalInfo.email')?.value }}</span>
+                <input *ngIf="isEditing" type="email" formControlName="email" class="contact-input">
+              </div>
+              
+              <div class="contact-item">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <span *ngIf="!isEditing">{{ cvForm.get('personalInfo.address')?.value }}</span>
+                <input *ngIf="isEditing" type="text" formControlName="address" class="contact-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- About Me Section -->
+          <div class="section" [formGroupName]="'personalInfo'">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              About Me
+            </h2>
+            <p *ngIf="!isEditing" class="about-text">{{ cvForm.get('personalInfo.about')?.value }}</p>
+            <textarea *ngIf="isEditing" formControlName="about" class="about-textarea" rows="6"></textarea>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="section">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19v2h-1.5v17.5c0 .83-.67 1.5-1.5 1.5H8c-.83 0-1.5-.67-1.5-1.5V4H5V2h4.5V.5c0-.83.67-1.5 1.5-1.5h3c.83 0 1.5.67 1.5 1.5V2H19.5z"/>
+              </svg>
+              Skills
+            </h2>
+            <div formArrayName="skills">
+              <div *ngFor="let skill of skillsArray.controls; let i = index" class="skill-item">
+                <span *ngIf="!isEditing" class="skill-text">• {{ skill.value }}</span>
+                <div *ngIf="isEditing" class="skill-edit">
+                  <input type="text" [formControlName]="i" class="skill-input">
+                  <button type="button" class="remove-btn" (click)="removeSkill(i)">×</button>
+                </div>
+              </div>
+              <button *ngIf="isEditing" type="button" class="add-btn" (click)="addSkill()">+ Add Skill</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <!-- Education Section -->
+          <div class="section">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+              </svg>
+              Education
+            </h2>
+            <div formArrayName="education">
+              <div *ngFor="let edu of educationArray.controls; let i = index" class="timeline-item" [formGroupName]="i">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <h3 *ngIf="!isEditing" class="timeline-title">{{ edu.get('degree')?.value }}</h3>
+                    <input *ngIf="isEditing" type="text" formControlName="degree" class="timeline-input">
+                    
+                    <span *ngIf="!isEditing" class="timeline-date">{{ edu.get('startYear')?.value }} - {{ edu.get('endYear')?.value }}</span>
+                    <div *ngIf="isEditing" class="date-inputs">
+                      <input type="text" formControlName="startYear" placeholder="Start Year" class="year-input">
+                      <input type="text" formControlName="endYear" placeholder="End Year" class="year-input">
+                    </div>
+                  </div>
+                  
+                  <p *ngIf="!isEditing" class="timeline-subtitle">{{ edu.get('institution')?.value }}</p>
+                  <input *ngIf="isEditing" type="text" formControlName="institution" placeholder="Institution" class="timeline-input">
+                  
+                  <p *ngIf="!isEditing" class="timeline-description">{{ edu.get('description')?.value }}</p>
+                  <textarea *ngIf="isEditing" formControlName="description" placeholder="Description" class="timeline-textarea" rows="3"></textarea>
+                  
+                  <button *ngIf="isEditing" type="button" class="remove-btn timeline-remove" (click)="removeEducation(i)">Remove</button>
+                </div>
+              </div>
+              <button *ngIf="isEditing" type="button" class="add-btn" (click)="addEducation()">+ Add Education</button>
+            </div>
+          </div>
+
+          <!-- Experience Section -->
+          <div class="section">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 6h-2.5l-1.5-1.5h-5L9.5 6H7c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM19 18H8V8h2.5l1.5-1.5h5L18.5 8H19v10z"/>
+              </svg>
+              Experience
+            </h2>
+            <div formArrayName="experience">
+              <div *ngFor="let exp of experienceArray.controls; let i = index" class="timeline-item" [formGroupName]="i">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <h3 *ngIf="!isEditing" class="timeline-title">{{ exp.get('position')?.value }}</h3>
+                    <input *ngIf="isEditing" type="text" formControlName="position" class="timeline-input">
+                    
+                    <span *ngIf="!isEditing" class="timeline-date">{{ exp.get('startYear')?.value }} - {{ exp.get('endYear')?.value }}</span>
+                    <div *ngIf="isEditing" class="date-inputs">
+                      <input type="text" formControlName="startYear" placeholder="Start Year" class="year-input">
+                      <input type="text" formControlName="endYear" placeholder="End Year" class="year-input">
+                    </div>
+                  </div>
+                  
+                  <p *ngIf="!isEditing" class="timeline-subtitle">{{ exp.get('company')?.value }}</p>
+                  <input *ngIf="isEditing" type="text" formControlName="company" placeholder="Company" class="timeline-input">
+                  
+                  <p *ngIf="!isEditing" class="timeline-description">{{ exp.get('description')?.value }}</p>
+                  <textarea *ngIf="isEditing" formControlName="description" placeholder="Description" class="timeline-textarea" rows="3"></textarea>
+                  
+                  <button *ngIf="isEditing" type="button" class="remove-btn timeline-remove" (click)="removeExperience(i)">Remove</button>
+                </div>
+              </div>
+              <button *ngIf="isEditing" type="button" class="add-btn" (click)="addExperience()">+ Add Experience</button>
+            </div>
+          </div>
+
+          <!-- References Section -->
+          <div class="section">
+            <h2 class="section-title">
+              <svg class="section-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17.5c-.8 0-1.54.37-2.01 1.01l-2.54 3.45c-.34.46-.01 1.13.57 1.13H16v6h4zm-12.5 0v-7.5h-2A1.5 1.5 0 0 1 4 13V9.5A1.5 1.5 0 0 1 5.5 8h3A1.5 1.5 0 0 1 10 9.5V13a1.5 1.5 0 0 1-1.5 1.5h-2V22h-3zM6 4c1.11 0 2-.89 2-2S7.11 0 6 0s-2 .89-2 2 .89 2 2 2z"/>
+              </svg>
+              References
+            </h2>
+            <div formArrayName="references" class="references-grid">
+              <div *ngFor="let ref of referencesArray.controls; let i = index" class="reference-item" [formGroupName]="i">
+                <h3 *ngIf="!isEditing" class="reference-name">{{ ref.get('name')?.value }}</h3>
+                <input *ngIf="isEditing" type="text" formControlName="name" placeholder="Name" class="reference-input">
+                
+                <p *ngIf="!isEditing" class="reference-position">{{ ref.get('position')?.value }}</p>
+                <input *ngIf="isEditing" type="text" formControlName="position" placeholder="Position" class="reference-input">
+                
+                <div class="reference-contact">
+                  <p *ngIf="!isEditing"><strong>Phone:</strong> {{ ref.get('phone')?.value }}</p>
+                  <div *ngIf="isEditing" class="reference-field">
+                    <label>Phone:</label>
+                    <input type="text" formControlName="phone" class="reference-input">
+                  </div>
+                  
+                  <p *ngIf="!isEditing"><strong>Email:</strong> {{ ref.get('email')?.value }}</p>
+                  <div *ngIf="isEditing" class="reference-field">
+                    <label>Email:</label>
+                    <input type="email" formControlName="email" class="reference-input">
+                  </div>
+                </div>
+                
+                <button *ngIf="isEditing" type="button" class="remove-btn" (click)="removeReference(i)">Remove</button>
+              </div>
+              <button *ngIf="isEditing" type="button" class="add-btn" (click)="addReference()">+ Add Reference</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isEditing" class="form-actions">
+        <button type="submit" class="save-btn">Save Changes</button>
+        <button type="button" class="cancel-btn" (click)="toggleEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
