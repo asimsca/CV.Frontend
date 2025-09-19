@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { TestCVComponent } from './test-cv/test-cv.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TestCV2Component } from './test-cv2/test-cv2.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'pricing', component: PricingComponent },
       { path: 'templates', component: TemplatesComponent },
-      { path: 'testCV', component: TestCVComponent }
+      { path: 'testCV', component: TestCVComponent },
+      { path: 'testCV2', component: TestCV2Component }
     ]
   }
 ];
@@ -35,7 +37,8 @@ const routes: Routes = [
     PricingComponent,
     HeaderComponent,
     FooterComponent,
-    TestCVComponent
+    TestCVComponent,
+    TestCV2Component
   ],
   imports: [
     CommonModule,
