@@ -18,10 +18,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [{
   path: '',
-  loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_landing_landing_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/landing/landing.module */ 8510)).then(mod => mod.LandingModule)
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_angular_forms_fesm2022_forms_mjs"), __webpack_require__.e("src_app_pages_landing_landing_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/landing/landing.module */ 8510)).then(mod => mod.LandingModule)
 }, {
   path: 'auth',
-  loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_auth_auth_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/auth/auth.module */ 8472)).then(mod => mod.AuthModule)
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_angular_forms_fesm2022_forms_mjs"), __webpack_require__.e("src_app_pages_auth_auth_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/auth/auth.module */ 8472)).then(mod => mod.AuthModule)
 }, {
   path: 'admin',
   loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_admin_admin_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/admin/admin.module */ 7830)).then(mod => mod.AdminModule)
