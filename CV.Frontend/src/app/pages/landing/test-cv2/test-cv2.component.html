@@ -2,9 +2,9 @@
   <!-- Action Buttons -->
   <div class="mb-3 text-end">
     <button class="btn btn-primary me-2" (click)="toggleEdit()">
-      {{ isEditing ? 'Preview' : 'Edit' }}
+      {{ isEditing ? 'Preview CV' : 'Edit CV' }}
     </button>
-    <button class="btn btn-success me-2" (click)="onSave()">Save</button>
+    <button *ngIf="isEditing" class="btn btn-success me-2" (click)="onSave()">Save</button>
     <button class="btn btn-outline-secondary" (click)="onDownload()">Download</button>
   </div>
 
@@ -67,7 +67,7 @@
         </div>
 
         <!-- Languages -->
-        <div class="sidebar-section mt-auto" formArrayName="languages">
+        <div class="sidebar-section " formArrayName="languages">
           <h5 class="section-title text-uppercase">Languages</h5>
           <ul class="list-unstyled small mb-0" *ngIf="!isEditing">
             <li *ngFor="let lang of languagesArray.controls">
@@ -101,7 +101,7 @@
         <div formArrayName="experience">
           <div *ngFor="let exp of experienceArray.controls; let i = index" [formGroupName]="i" class="mb-3">
             <div *ngIf="!isEditing">
-              <h6 class="mb-0">{{ exp.value.role }}</h6>
+              <h6 class="mb-0"><b>{{ exp.value.role }}</b></h6>
               <small class="text-muted d-block mb-2">{{ exp.value.company }} | {{ exp.value.duration }}</small>
               <p class="mb-0">{{ exp.value.responsibilities }}</p>
             </div>
