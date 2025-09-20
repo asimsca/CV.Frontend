@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-test-cv2',
@@ -8,11 +10,13 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class TestCV2Component implements OnInit {
   cvForm!: FormGroup;
+  isEditing: boolean = false;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.cvForm = this.fb.group({
+            profileImage: [''], // store uploaded image (base64)
       name: ['OLIVIA WILSON'],
       title: ['ACCOUNTANT'],
       summary: [
@@ -78,16 +82,49 @@ export class TestCV2Component implements OnInit {
   get skillsArray(): FormArray {
     return this.cvForm.get('skills') as FormArray;
   }
-
   get languagesArray(): FormArray {
     return this.cvForm.get('languages') as FormArray;
   }
-
   get experienceArray(): FormArray {
     return this.cvForm.get('experience') as FormArray;
   }
-
   get educationArray(): FormArray {
     return this.cvForm.get('education') as FormArray;
+  }
+
+  // --- Button Functions ---
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
+  onSave() {
+    const cvData = this.cvForm.value;
+    localStorage.setItem('cvData', JSON.stringify(cvData));
+    alert('✅ CV saved successfully!');
+  }
+
+  async onDownload() {
+    const element = document.getElementById('cvContent');
+    if (element) {
+      const canvas = await html2canvas(element);
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.save('cv.pdf');
+    }
+  }
+
+   // Handle file upload for profile image
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.cvForm.patchValue({ profileImage: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

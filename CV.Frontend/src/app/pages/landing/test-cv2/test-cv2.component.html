@@ -1,71 +1,135 @@
 <div class="container cv-container my-4">
+  <!-- Action Buttons -->
+  <div class="mb-3 text-end">
+    <button class="btn btn-primary me-2" (click)="toggleEdit()">
+      {{ isEditing ? 'Preview' : 'Edit' }}
+    </button>
+    <button class="btn btn-success me-2" (click)="onSave()">Save</button>
+    <button class="btn btn-outline-secondary" (click)="onDownload()">Download</button>
+  </div>
+
+  <form [formGroup]="cvForm">
     <div class="row g-0">
-        <!-- LEFT SIDEBAR -->
-        <aside class="col-md-4 col-lg-3 sidebar d-flex flex-column text-white p-4">
-            <!-- Profile Image + Name -->
-            <div class="text-center mb-4">
-                <img src="assets/templatesImages/aaa.png" alt="Profile" class="profile-img mb-3 rounded-circle" />
-                <!-- <h2 class="person-name h5 mb-1">{{ cvForm.value.name }}</h2>
-                <div class="person-title text-uppercase small">{{ cvForm.value.title }}</div> -->
-            </div>
+      <!-- LEFT SIDEBAR -->
+      <aside class="col-md-4 col-lg-3 sidebar d-flex flex-column text-white p-4">
+       <!-- Profile Image -->
+<div class="text-center mb-4">
+  <img
+    [src]="cvForm.value.profileImage || 'assets/templatesImages/aaa.png'"
+    alt="Profile"
+    class="profile-img mb-3 rounded-circle"
+  />
 
-            <!-- <hr class="sidebar-sep" /> -->
+  <!-- Upload only in edit mode -->
+  <div *ngIf="isEditing">
+    <input type="file" class="form-control mt-2" (change)="onFileSelected($event)" />
+  </div>
+</div>
 
-            <!-- Contact -->
-            <div class="sidebar-section mb-4">
-                <h5 class="section-title text-uppercase">Contact</h5>
-                <ul class="list-unstyled small mb-0">
-                    <li><strong>Email:</strong> <br> {{ cvForm.value.contact.email }}</li><br>
-                    <li><strong>Phone:</strong> <br> {{ cvForm.value.contact.phone }}</li><br>
-                    <li><strong>Address:</strong> <br> {{ cvForm.value.contact.address }}</li><br>
-                    <li><strong>LinkedIn:</strong> <br> {{ cvForm.value.contact.linkedin }}</li><br>
-                </ul>
-            </div>
-
-            <!-- <hr class="sidebar-sep" /> -->
-
-            <!-- Skills -->
-              <br><br>
-            <div class="sidebar-section mb-4">
-                <h5 class="section-title text-uppercase">Skills</h5>
-                <ul class="list-unstyled small mb-0">
-                    <li *ngFor="let skill of skillsArray.controls">• &nbsp;{{ skill.value }}</li>
-                </ul>
-            </div>
-
-            <!-- <hr class="sidebar-sep" /> -->
-
-            <!-- Languages -->
-             <br><br>
-            <div class="sidebar-section mt-auto">
-                 <h5 class="section-title text-uppercase">Languages</h5>
-                <ul class="list-unstyled small mb-0">
-                    <li *ngFor="let lang of languagesArray.controls">
-                        • &nbsp;{{ lang.value.name }} – {{ lang.value.level }}
-                    </li>
-                </ul>
-            </div>
-        </aside>
-
-
-        <!-- RIGHT MAIN -->
-        <div class="col-md-8 col-lg-9 bg-white p-5">
-            <h1 class="fw-bold">{{ cvForm.value.name }}</h1>
-            <h4 class="text-uppercase text-muted">{{ cvForm.value.title }}</h4>
-            <p class="mt-3">{{ cvForm.value.summary }}</p>
-
-            <h5 class="mt-4">Work Experience</h5>
-            <div *ngFor="let exp of experienceArray.controls" class="mb-3">
-                <h6 class="mb-0">{{ exp.value.role }}</h6>
-                <small class="text-muted d-block mb-2">{{ exp.value.company }} | {{ exp.value.duration }}</small>
-                <p class="mb-0">{{ exp.value.responsibilities }}</p>
-            </div>
-
-            <h5 class="mt-4">Education</h5>
-            <div *ngFor="let edu of educationArray.controls" class="mb-3">
-                <h6 class="mb-0">{{ edu.value.degree }}</h6>
-                <small class="text-muted d-block">{{ edu.value.institution }} | {{ edu.value.duration }}</small>
-            </div>
+        <!-- Contact -->
+        <div class="sidebar-section mb-4" formGroupName="contact">
+          <h5 class="section-title text-uppercase">Contact</h5>
+          <ul class="list-unstyled small mb-0">
+            <li>
+              <strong>Email:</strong>
+              <div *ngIf="!isEditing">{{ cvForm.value.contact.email }}</div>
+              <input *ngIf="isEditing" type="email" class="form-control" formControlName="email" />
+            </li>
+            <li>
+              <strong>Phone:</strong>
+              <div *ngIf="!isEditing">{{ cvForm.value.contact.phone }}</div>
+              <input *ngIf="isEditing" type="text" class="form-control" formControlName="phone" />
+            </li>
+            <li>
+              <strong>Address:</strong>
+              <div *ngIf="!isEditing">{{ cvForm.value.contact.address }}</div>
+              <input *ngIf="isEditing" type="text" class="form-control" formControlName="address" />
+            </li>
+            <li>
+              <strong>LinkedIn:</strong>
+              <div *ngIf="!isEditing">{{ cvForm.value.contact.linkedin }}</div>
+              <input *ngIf="isEditing" type="text" class="form-control" formControlName="linkedin" />
+            </li>
+          </ul>
         </div>
+
+        <!-- Skills -->
+        <div class="sidebar-section mb-4" formArrayName="skills">
+          <h5 class="section-title text-uppercase">Skills</h5>
+          <ul class="list-unstyled small mb-0" *ngIf="!isEditing">
+            <li *ngFor="let skill of skillsArray.controls">• &nbsp;{{ skill.value }}</li>
+          </ul>
+          <div *ngIf="isEditing">
+            <div *ngFor="let skill of skillsArray.controls; let i = index">
+              <input type="text" class="form-control mb-1" [formControlName]="i" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="sidebar-section mt-auto" formArrayName="languages">
+          <h5 class="section-title text-uppercase">Languages</h5>
+          <ul class="list-unstyled small mb-0" *ngIf="!isEditing">
+            <li *ngFor="let lang of languagesArray.controls">
+              • &nbsp;{{ lang.value.name }} – {{ lang.value.level }}
+            </li>
+          </ul>
+          <div *ngIf="isEditing">
+            <div *ngFor="let lang of languagesArray.controls; let i = index" [formGroupName]="i">
+              <input type="text" class="form-control mb-1" formControlName="name" placeholder="Name" />
+              <input type="text" class="form-control mb-1" formControlName="level" placeholder="Level" />
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT MAIN -->
+      <div class="col-md-8 col-lg-9 bg-white p-5">
+        <div *ngIf="!isEditing">
+          <h1 class="fw-bold">{{ cvForm.value.name }}</h1>
+          <h4 class="text-uppercase text-muted">{{ cvForm.value.title }}</h4>
+          <p class="mt-3">{{ cvForm.value.summary }}</p>
+        </div>
+        <div *ngIf="isEditing">
+          <input type="text" class="form-control mb-2" formControlName="name" placeholder="Full Name" />
+          <input type="text" class="form-control mb-2" formControlName="title" placeholder="Title" />
+          <textarea class="form-control mb-3" formControlName="summary" placeholder="Summary"></textarea>
+        </div>
+
+        <!-- Work Experience -->
+        <h5 class="section-title text-uppercase black text-dark">Work Experience</h5>
+        <div formArrayName="experience">
+          <div *ngFor="let exp of experienceArray.controls; let i = index" [formGroupName]="i" class="mb-3">
+            <div *ngIf="!isEditing">
+              <h6 class="mb-0">{{ exp.value.role }}</h6>
+              <small class="text-muted d-block mb-2">{{ exp.value.company }} | {{ exp.value.duration }}</small>
+              <p class="mb-0">{{ exp.value.responsibilities }}</p>
+            </div>
+            <div *ngIf="isEditing">
+              <input type="text" class="form-control mb-1" formControlName="role" placeholder="Role" />
+              <input type="text" class="form-control mb-1" formControlName="company" placeholder="Company" />
+              <input type="text" class="form-control mb-1" formControlName="duration" placeholder="Duration" />
+              <textarea class="form-control mb-1" formControlName="responsibilities" placeholder="Responsibilities"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <h5 class="section-title text-uppercase black text-dark">Education</h5>
+        <div formArrayName="education">
+          <div *ngFor="let edu of educationArray.controls; let i = index" [formGroupName]="i" class="mb-3">
+            <div *ngIf="!isEditing">
+              <h6 class="mb-0"><b>{{ edu.value.degree }}</b></h6>
+              <small class="text-muted d-block">{{ edu.value.institution }} | {{ edu.value.duration }}</small>
+            </div>
+            <div *ngIf="isEditing">
+              <input type="text" class="form-control mb-1" formControlName="degree" placeholder="Degree" />
+              <input type="text" class="form-control mb-1" formControlName="institution" placeholder="Institution" />
+              <input type="text" class="form-control mb-1" formControlName="duration" placeholder="Duration" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </form>
 </div>
