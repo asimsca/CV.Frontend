@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { AddCvRequest } from 'src/app/models/dto/request/cv/add-cv-request';
+import { CvService } from 'src/app/services/cv/cv.service';
 
 @Component({
   selector: 'app-test-cv2',
@@ -12,11 +14,11 @@ export class TestCV2Component implements OnInit {
   cvForm!: FormGroup;
   isEditing: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cvService: CvService) { }
 
   ngOnInit(): void {
     this.cvForm = this.fb.group({
-            profileImage: [''], // store uploaded image (base64)
+      profileImage: [''], // store uploaded image (base64)
       name: ['OLIVIA WILSON'],
       title: ['ACCOUNTANT'],
       summary: [
@@ -100,7 +102,52 @@ export class TestCV2Component implements OnInit {
   onSave() {
     const cvData = this.cvForm.value;
     localStorage.setItem('cvData', JSON.stringify(cvData));
-    alert('✅ CV saved successfully!');
+    // alert('✅ CV saved successfully!');
+
+    const cvFormValues = this.cvForm.value;
+
+    const addCvRequest: AddCvRequest = {
+      title: cvFormValues.name,
+      designation: cvFormValues.title,
+      summary: cvFormValues.summary,
+      profilePictureUrl: cvFormValues.profileImage, // assuming you used this key in form
+
+      contacts: cvFormValues.contact
+        ? Object.keys(cvFormValues.contact).map(key => ({
+          type: key,
+          value: cvFormValues.contact[key]
+        }))
+        : [],
+
+      education: cvFormValues.education?.map((edu: any) => ({
+        institition: edu.institution,
+        certificationOrDegree: edu.degree,
+        passingYear: edu.duration,
+        totalMarksOrGrades: "",
+        acheivedMarksOrGrades: ""
+      })) || [],
+
+      experience: cvFormValues.experience?.map((exp: any) => ({
+        company: exp.company,
+        role: exp.role,
+        startDate: exp.duration,
+        endDate: exp.duration,
+        responsibilities : exp.responsibilities
+      })) || [],
+
+      skills: cvFormValues.skills?.join(',') // if your form stores skills as array
+    };
+
+    console.log("Add CV Request : " , addCvRequest);
+    this.cvService.addCv(addCvRequest).subscribe((response) => {
+      if (response.isSuccess) {
+        alert('✅ CV saved successfully! ' + response.message);
+      }
+      else {
+        alert('CV failed! ' + response.message);
+      }
+    })
+
   }
 
   async onDownload() {
@@ -116,7 +163,7 @@ export class TestCV2Component implements OnInit {
     }
   }
 
-   // Handle file upload for profile image
+  // Handle file upload for profile image
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
