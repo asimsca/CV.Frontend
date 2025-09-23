@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { AddCvRequest } from 'src/app/models/dto/request/cv/add-cv-request';
 import { CvService } from 'src/app/services/cv/cv.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-test-cv2',
@@ -101,30 +102,42 @@ export class TestCV2Component implements OnInit {
 
   onSave() {
     debugger;
-  const cvFormValues = this.cvForm.value;
+    const cvFormValues = this.cvForm.value;
 
-  // Check if user selected a new file (base64 means not yet uploaded)
-  if (cvFormValues.profileImage && cvFormValues.profileImage.startsWith("data:")) {
-    // Convert base64 back to File
-    const file = this.base64ToFile(cvFormValues.profileImage, "profile.png");
+    // Check if user selected a new file (base64 means not yet uploaded)
+    if (cvFormValues.profileImage && cvFormValues.profileImage.startsWith("data:")) {
+      // Convert base64 back to File
+      const file = this.base64ToFile(cvFormValues.profileImage, "profile.png");
 
-    // 1) First upload the profile picture
-    this.cvService.uploadProfilePicture(file).subscribe(uploadResp => {
-      if (uploadResp.isSuccess) {
-        // 2) Patch uploaded URL into form
-        this.cvForm.patchValue({ profileImage: uploadResp.data });
+      // 1) First upload the profile picture
+      this.cvService.uploadProfilePicture(file).subscribe(uploadResp => {
+        if (uploadResp.isSuccess) {
+          // 2) Patch uploaded URL into form
+          // this.cvForm.patchValue({ profileImage: uploadResp.data });
 
-        // 3) Call AddCV with updated form
-        this.callAddCvApi();
-      } else {
-        alert("❌ Image upload failed: " + uploadResp.message);
-      }
-    });
-  } else {
-    // If already URL (no new image), just call AddCV
-    this.callAddCvApi();
+
+          // backend returned: /uploads/profile-pics/xxxx.png
+          const relativePath = uploadResp.data;
+
+          // remove "/api" from baseAPIUrl so images load correctly
+          const baseUrl = environment.baseAPIUrl.replace('/api', '');
+
+          const fullUrl = baseUrl + relativePath;
+
+          // update form
+          this.cvForm.patchValue({ profileImage: fullUrl });
+
+          // 3) Call AddCV with updated form
+          this.callAddCvApi();
+        } else {
+          alert("❌ Image upload failed: " + uploadResp.message);
+        }
+      });
+    } else {
+      // If already URL (no new image), just call AddCV
+      this.callAddCvApi();
+    }
   }
-}
   callAddCvApi() {
     const cvData = this.cvForm.value;
     localStorage.setItem('cvData', JSON.stringify(cvData));
@@ -158,13 +171,13 @@ export class TestCV2Component implements OnInit {
         role: exp.role,
         startDate: exp.duration,
         endDate: exp.duration,
-        responsibilities : exp.responsibilities
+        responsibilities: exp.responsibilities
       })) || [],
 
       skills: cvFormValues.skills?.join(',') // if your form stores skills as array
     };
 
-    console.log("Add CV Request : " , addCvRequest);
+    console.log("Add CV Request : ", addCvRequest);
     this.cvService.addCv(addCvRequest).subscribe((response) => {
       if (response.isSuccess) {
         alert('✅ CV saved successfully! ' + response.message);
@@ -190,17 +203,17 @@ export class TestCV2Component implements OnInit {
   }
 
   // Convert base64 string → File object
-private base64ToFile(base64: string, filename: string): File {
-  const arr = base64.split(',');
-  const mime = arr[0].match(/:(.*?);/)![1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
+  private base64ToFile(base64: string, filename: string): File {
+    const arr = base64.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
   }
-  return new File([u8arr], filename, { type: mime });
-}
 
   // Handle file upload for profile image
   onFileSelected(event: Event) {
