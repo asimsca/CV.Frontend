@@ -11,12 +11,20 @@ import { environment } from 'src/environments/environment';
 })
 export class CvService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
-  addCv(object : AddCvRequest) : Observable<BaseResponse<string>>{
+  addCv(object: AddCvRequest): Observable<BaseResponse<string>> {
     debugger;
     let uri = `${environment.baseAPIUrl}/Cv/AddCv`;
-    return this.http.post<BaseResponse<string>>(uri, object).pipe(map(data => <BaseResponse<string>> data));
+    return this.http.post<BaseResponse<string>>(uri, object).pipe(map(data => <BaseResponse<string>>data));
+  }
+
+  uploadProfilePicture(file: File): Observable<BaseResponse<string>> {
+    const formData = new FormData();
+    formData.append('file', file);
+    let uri = `${environment.baseAPIUrl}/Cv/UploadProfilePicture`;
+    return this.http.post<BaseResponse<string>>(uri, formData)
+      .pipe(map(data => <BaseResponse<string>>data)); // returns file URL
   }
 }
