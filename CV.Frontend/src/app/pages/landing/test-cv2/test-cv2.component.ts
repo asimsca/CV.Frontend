@@ -181,6 +181,7 @@ export class TestCV2Component implements OnInit {
     this.cvService.addCv(addCvRequest).subscribe((response) => {
       if (response.isSuccess) {
         alert('✅ CV saved successfully! ' + response.message);
+        this.isEditing = false;
       }
       else {
         alert('CV failed! ' + response.message);
@@ -190,17 +191,41 @@ export class TestCV2Component implements OnInit {
   }
 
   async onDownload() {
-    const element = document.getElementById('cvContent');
-    if (element) {
-      const canvas = await html2canvas(element);
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const element = document.getElementById('cvContent');
+  if (element) {
+    const canvas = await html2canvas(element, { scale: 2 }); // better quality
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+    let position = 0;
+
+    if (imgHeight <= pageHeight) {
+      // Single-page CV
       pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-      pdf.save('cv.pdf');
+    } else {
+      // Multi-page CV
+      let heightLeft = imgHeight;
+
+      while (heightLeft > 0) {
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        position -= pageHeight;
+
+        if (heightLeft > 0) {
+          pdf.addPage();
+        }
+      }
     }
+
+    pdf.save('cv.pdf');
   }
+}
 
   // Convert base64 string → File object
   private base64ToFile(base64: string, filename: string): File {

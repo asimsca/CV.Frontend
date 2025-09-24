@@ -18,7 +18,8 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath : 'assets/templatesImages/1.jpg'
+      mockImagePath : 'assets/templatesImages/1.jpg',
+      route: '/testCV2' 
     },
     {
       id: 2,

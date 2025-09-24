@@ -1,13 +1,15 @@
-<div class="container cv-container my-4">
-    <!-- Action Buttons -->
+<div class="container my-0 p-1 bg-light">
+<!-- Action Buttons -->
     <div class="mb-3 text-end">
         <button class="btn btn-primary me-2" (click)="toggleEdit()">
             {{ isEditing ? 'Preview CV' : 'Edit CV' }}
         </button>
         <button *ngIf="isEditing" class="btn btn-success me-2" (click)="onSave()">Save</button>
-        <button class="btn btn-outline-secondary" (click)="onDownload()">Download</button>
+        <button *ngIf="!isEditing" class="btn btn-outline-info" (click)="onDownload()">Download</button>
     </div>
+</div>
 
+<div id="cvContent" class="container cv-container my-4">
     <form [formGroup]="cvForm">
         <div class="row g-0">
             <!-- LEFT SIDEBAR -->

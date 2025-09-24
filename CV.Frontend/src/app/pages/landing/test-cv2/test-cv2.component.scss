@@ -12,6 +12,7 @@
   background: #fff;
   border-radius: 8px;
 //   min-height: 1200px;
+  min-height: 297mm; /* A4 height */
 }
 
 // @media (max-width: 768px) {
@@ -34,6 +35,7 @@ ul {
   background: linear-gradient(180deg, #2c3e50, #34495e); /* Professional dark gradient */
 //   min-height: 100%;
   color: #f8f9fa;
+  min-height: 336mm;
 }
 
 .profile-img {
