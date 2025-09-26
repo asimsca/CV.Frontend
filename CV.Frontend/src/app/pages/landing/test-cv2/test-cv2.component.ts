@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TestCV2Component implements OnInit {
   cvForm!: FormGroup;
-  isEditing: boolean = false;
+  isEditing: boolean = true;
 
   constructor(private fb: FormBuilder, private cvService: CvService) { }
 
