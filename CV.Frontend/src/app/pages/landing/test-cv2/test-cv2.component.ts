@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { AddCvRequest } from 'src/app/models/dto/request/cv/add-cv-request';
 import { CvService } from 'src/app/services/cv/cv.service';
+import { SweetAlertService } from 'src/app/shared/services/sweet-alert.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,7 +16,7 @@ export class TestCV2Component implements OnInit {
   cvForm!: FormGroup;
   isEditing: boolean = true;
 
-  constructor(private fb: FormBuilder, private cvService: CvService) { }
+  constructor(private fb: FormBuilder, private cvService: CvService, private sweetAlert: SweetAlertService) { }
 
   ngOnInit(): void {
     this.cvForm = this.fb.group({
@@ -190,42 +191,85 @@ export class TestCV2Component implements OnInit {
 
   }
 
+
+  // below code directly download cv on client side
+  //   async onDownload() {
+  //   const element = document.getElementById('cvContent');
+  //   if (element) {
+  //     const canvas = await html2canvas(element, { scale: 2 }); // better quality
+  //     const imgData = canvas.toDataURL('image/png');
+
+  //     const pdf = new jsPDF('p', 'mm', 'a4');
+  //     const pageWidth = pdf.internal.pageSize.getWidth();
+  //     const pageHeight = pdf.internal.pageSize.getHeight();
+
+  //     const imgWidth = pageWidth;
+  //     const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+  //     let position = 0;
+
+  //     if (imgHeight <= pageHeight) {
+  //       // Single-page CV
+  //       pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+  //     } else {
+  //       // Multi-page CV
+  //       let heightLeft = imgHeight;
+
+  //       while (heightLeft > 0) {
+  //         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+  //         heightLeft -= pageHeight;
+  //         position -= pageHeight;
+
+  //         if (heightLeft > 0) {
+  //           pdf.addPage();
+  //         }
+  //       }
+  //     }
+
+  //     pdf.save('cv.pdf');
+  //   }
+  // }
+
+
+  //below code
+  // User clicks Download → Angular generates PDF → sends to API.
+  // API saves file into wwwroot/uploads/cvs/.
+  // API returns URL like https://localhost:44308/uploads/cvs/2105cf1d-e047-4b32-9497-7c5974c6b6da.pdf
   async onDownload() {
-  const element = document.getElementById('cvContent');
-  if (element) {
-    const canvas = await html2canvas(element, { scale: 2 }); // better quality
-    const imgData = canvas.toDataURL('image/png');
-
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * pageWidth) / canvas.width;
-
-    let position = 0;
-
-    if (imgHeight <= pageHeight) {
-      // Single-page CV
+    const element = document.getElementById('cvContent');
+    if (element) {
+      const canvas = await html2canvas(element);
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
       pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    } else {
-      // Multi-page CV
-      let heightLeft = imgHeight;
 
-      while (heightLeft > 0) {
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-        position -= pageHeight;
+      // Convert PDF to Blob
+      const pdfBlob = pdf.output('blob');
 
-        if (heightLeft > 0) {
-          pdf.addPage();
+      // Prepare FormData
+      const formData = new FormData();
+      formData.append('file', pdfBlob, 'cv.pdf');
+
+      // Call backend API
+      this.cvService.uploadCvPdf(formData).subscribe(resp => {
+        debugger;
+        if (resp.isSuccess) {
+          // alert("✅ Your CV is ready! Download here: " + resp.data);
+          this.sweetAlert.downloadSucces()
+            .then((result) => {
+              if (result.isConfirmed) {
+                window.open(resp.data, '_blank'); // open in new tab OR
+              }
+            });
+        } else {
+          this.sweetAlert.showError('Download Failed', resp.message);
         }
-      }
+      });
     }
-
-    pdf.save('cv.pdf');
   }
-}
+
 
   // Convert base64 string → File object
   private base64ToFile(base64: string, filename: string): File {

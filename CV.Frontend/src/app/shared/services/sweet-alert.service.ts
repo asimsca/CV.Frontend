@@ -15,6 +15,17 @@ export class SweetAlertService {
       text: text,
     });
   }
+
+  downloadSucces(title: string = 'Download Success', text: string = 'Click below to download your file.', confirmButtonText: string = 'Yes, Download it!', cancelButtonText: string = 'No, cancel it!'){
+    return Swal.fire({
+      title: title,
+      text: text,
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText,
+      cancelButtonText: cancelButtonText,
+    });
+  }
  
   showError(title: string, text: string = ''): Promise<any> {
     return Swal.fire({

@@ -27,4 +27,11 @@ export class CvService {
     return this.http.post<BaseResponse<string>>(uri, formData)
       .pipe(map(data => <BaseResponse<string>>data)); // returns file URL
   }
+
+  uploadCvPdf(fileData: FormData) {
+    let uri = `${environment.baseAPIUrl}/Cv/UploadPdf`;
+
+    return this.http.post<BaseResponse<string>>(uri, fileData)
+      .pipe(map(data => <BaseResponse<string>>data)); // returns file URL
+  }
 }
