@@ -1,12 +1,13 @@
-<div class="container my-0 p-1 bg-light">
-<!-- Action Buttons -->
-    <div class="mb-3 text-end">
-        <button class="btn btn-primary me-2" (click)="toggleEdit()">
-            {{ isEditing ? 'Preview CV' : 'Edit CV' }}
-        </button>
-        <button *ngIf="isEditing" class="btn btn-success me-2" (click)="onSave()">Save</button>
-        <button *ngIf="!isEditing" class="btn btn-outline-info" (click)="onDownload()">Download</button>
-    </div>
+<br><br>
+<div class="container mt-5 bg-light">
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-end align-items-center p-2" >
+    <button class="btn btn-primary me-2" (click)="toggleEdit()">
+      {{ isEditing ? 'Preview CV' : 'Edit CV' }}
+    </button>
+    <button *ngIf="isEditing" class="btn btn-success me-2" (click)="onSave()">Save</button>
+    <button *ngIf="!isEditing" class="btn btn-outline-info" (click)="onDownload()">Download</button>
+  </div>
 </div>
 
 <div id="cvContent" class="container cv-container my-4">
@@ -16,7 +17,7 @@
             <aside class="col-4 col-lg-3 sidebar d-flex flex-column text-white p-4">
                 <!-- Profile Image -->
                 <div class="text-center mb-4">
-                    <img [src]="cvForm.value.profileImage || 'assets/templatesImages/aaa.png'" alt="Profile"
+                    <img [src]="cvForm.get('profileImage')?.value || 'assets/templatesImages/aaa.png'" alt="Profile"
                         class="profile-img mb-3 rounded-circle" />
 
                     <!-- Upload only in edit mode -->
