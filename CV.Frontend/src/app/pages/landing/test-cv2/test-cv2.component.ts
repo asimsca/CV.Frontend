@@ -157,7 +157,7 @@ export class TestCV2Component implements OnInit {
           type: key,
           value: cvFormValues.contact[key]
         }))
-        : [],
+        : [], 
 
       education: cvFormValues.education?.map((edu: any) => ({
         institition: edu.institution,
