@@ -181,7 +181,7 @@ export class TestCV2Component implements OnInit {
     console.log("Add CV Request : ", addCvRequest);
     this.cvService.addCv(addCvRequest).subscribe((response) => {
       if (response.isSuccess) {
-        alert('✅ CV saved successfully! ' + response.message);
+        this.sweetAlert.showSuccess("Saved",  response.message);
         this.isEditing = false;
       }
       else {
