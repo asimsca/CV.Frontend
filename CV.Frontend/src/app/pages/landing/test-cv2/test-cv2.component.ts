@@ -20,8 +20,9 @@ export class TestCV2Component implements OnInit {
 
   ngOnInit(): void {
     this.cvForm = this.fb.group({
-      profileImage: [''], // store uploaded image (base64)
-      name: ['OLIVIA WILSON'],
+profileImage: [
+      environment.baseAPIUrl.replace('/api', '') + '/uploads/profile-pics/default.png'
+    ],      name: ['OLIVIA WILSON'],
       title: ['ACCOUNTANT'],
       summary: [
         'Skilled and experienced accountant with a proven track record of success in the financial services industry. Expertise in all aspects of accounting, including financial statement preparation, auditing, and taxation. Strong analytical and problem-solving skills.'
@@ -104,7 +105,7 @@ export class TestCV2Component implements OnInit {
   onSave() {
     debugger;
     const cvFormValues = this.cvForm.value;
-
+    debugger;
     // Check if user selected a new file (base64 means not yet uploaded)
     if (cvFormValues.profileImage && cvFormValues.profileImage.startsWith("data:")) {
       // Convert base64 back to File
@@ -290,6 +291,7 @@ export class TestCV2Component implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
+        debugger;
         this.cvForm.patchValue({ profileImage: reader.result as string });
       };
       reader.readAsDataURL(file);
