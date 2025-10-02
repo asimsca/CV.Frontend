@@ -18,7 +18,7 @@
                 <!-- Profile Image -->
                 <div class="text-center mb-4">
                     <img [src]="cvForm.get('profileImage')?.value || 'assets/templatesImages/aaa.png'" alt="Profile"
-                        class="profile-img mb-3 rounded-circle" />
+                        class="profile-img mb-3 rounded-circle"  crossOrigin="anonymous"/>
 
                     <!-- Upload only in edit mode -->
                     <div *ngIf="isEditing">

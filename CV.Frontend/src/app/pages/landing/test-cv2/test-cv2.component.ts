@@ -20,7 +20,7 @@ export class TestCV2Component implements OnInit {
 
   ngOnInit(): void {
     this.cvForm = this.fb.group({
-profileImage: [
+    profileImage: [
       environment.baseAPIUrl.replace('/api', '') + '/uploads/profile-pics/default.png'
     ],      name: ['OLIVIA WILSON'],
       title: ['ACCOUNTANT'],
@@ -239,7 +239,10 @@ profileImage: [
   async onDownload() {
     const element = document.getElementById('cvContent');
     if (element) {
-      const canvas = await html2canvas(element);
+      const canvas = await html2canvas(element, {
+  scale: 2,          // better quality
+  useCORS: true,     // allow CORS images
+});
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgWidth = 210;
