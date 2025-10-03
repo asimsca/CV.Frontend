@@ -2,7 +2,7 @@
     <nav class="nav-container">
       <div class="nav-content">
         <div class="logo">
-          <h2 [routerLink]="['']">CV Builder</h2>
+          <h2 [routerLink]="['home']">CV Builder</h2> <!-- we can also use [''] insead of ['home'] mean empty route which route to home-->
         </div>
 
         <div class="nav-links" [class.nav-open]="isMenuOpen">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="nav-actions">
-          <button class="btn btn-outline-primary">Sign In</button>
+          <button class="btn btn-outline-primary" [routerLink]="['/auth']">Sign In</button>
           <!-- <button class="btn btn-primary">Get Started</button> -->
           <button class="mobile-menu-btn" (click)="toggleMenu()">
             <span></span>

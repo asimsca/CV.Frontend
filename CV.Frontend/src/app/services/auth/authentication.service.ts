@@ -20,7 +20,7 @@ import { LogoutRequest } from 'src/app/models/dto/request/user-management/logout
 export const encryptStorage = new EncryptStorage(
   'dU0OlV5B7xMu9g33uP1DMPoqKGBUhROw',
   {
-    prefix: '@coinEnginePortal',
+    prefix: '@cvPortal',
   }
 );
 
@@ -39,25 +39,25 @@ export class AuthenticationService {
       let token = this.JwtToken;
       if (token == '') {
         // you can update this as per your key
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth']);
       }
     }
   }
 
   get refreshToken() {
-    return encryptStorage.getItem('coinEngineRefreshToken') ?? '';
+    return encryptStorage.getItem('cvRefreshToken') ?? '';
   }
 
   set refreshToken(token: string) {
-    encryptStorage.setItem('coinEngineRefreshToken', token);
+    encryptStorage.setItem('cvRefreshToken', token);
   }
 
   get JwtToken() {
-    return encryptStorage.getItem('coinEngineJwtToken') ?? '';
+    return encryptStorage.getItem('cvJwtToken') ?? '';
   }
 
   set JwtToken(token: string) {
-    encryptStorage.setItem('coinEngineJwtToken', token);
+    encryptStorage.setItem('cvJwtToken', token);
   }
 
   get getRetailerInfo() {
@@ -78,7 +78,7 @@ export class AuthenticationService {
       children: [],
     };
     menuItems.unshift(objItem);
-    localStorage.setItem('coinEngineMenuItems', JSON.stringify(menuItems));
+    localStorage.setItem('cvMenuItems', JSON.stringify(menuItems));
   }
 
   /**

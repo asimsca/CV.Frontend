@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     private sweetAlertService:SweetAlertService,
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern(RegexPatterns.emailPattern)]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
@@ -58,12 +58,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.errorMessage = '';
 
     let loginObj: LoginRequest = {
-      email: this.loginForm.controls['email'].value,
+      userName: this.loginForm.controls['username'].value,
       password: this.loginForm.controls['password'].value,
-      ip:''
     };
 
     this.authenticationService.login(loginObj).subscribe((resp) => {
@@ -71,13 +71,12 @@ export class LoginComponent implements OnInit {
         this.loginResponse = resp.data;
           //in case of OTP disbaled
           this.isLoginSuccessful = resp.isSuccess;
-          this.authenticationService.JwtToken = resp.data.token;
+          this.authenticationService.JwtToken = resp.data.accessToken;
           this.authenticationService.refreshToken = resp.data.refreshToken;
-          this.authenticationService.setMenuItems(resp.data.menuItems);
-          this.router.navigate(['dashboard']);          
+          // this.authenticationService.setMenuItems(resp.data.menuItems);
+          this.router.navigate(['home']);          
       } else {
         this.sweetAlertService.showError('Unsuccess',resp.message);
-
       }
     });
   }
