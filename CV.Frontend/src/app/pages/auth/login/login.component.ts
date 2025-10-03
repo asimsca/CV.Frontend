@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     ;
     const tokenValue = this.authenticationService.JwtToken;
     if (tokenValue) {
-      this.router.navigate(['landing']);
+      this.router.navigate(['home']);
     }
   }
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           // this.authenticationService.setMenuItems(resp.data.menuItems);
           this.router.navigate(['home']);          
       } else {
-        this.sweetAlertService.showError('Unsuccess',resp.message);
+        this.sweetAlertService.showError('Failed',resp.message);
       }
     });
   }
