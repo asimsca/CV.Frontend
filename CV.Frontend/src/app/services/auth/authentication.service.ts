@@ -64,6 +64,13 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem('retailerInfo') || '{}');
   }
 
+  logout(){
+    debugger;
+    // encryptStorage.removeItem('cvJwtToken');
+    encryptStorage.clear();
+    // this.router.navigate(['/auth']);
+  }
+
   setMenuItems(menuItems: MenuItems[]) {
 
     let objItem: MenuItems = {
@@ -117,14 +124,14 @@ export class AuthenticationService {
       .post<LoginResponse>(uri, authorizeOTPRequest)
       .pipe(map((data) => <LoginResponse>data));
   }
-  logout(logoutRequest: LogoutRequest) : Observable<BaseResponse<boolean>> {
-    encryptStorage.clear();
-          this.router.navigate(['login']);
-    const uri = `${this.baseAPIUrl}/authenticator/LogOut`;
-    return this.http
-    .post<BaseResponse<boolean>>(uri, logoutRequest)
-    .pipe(map((data) => <BaseResponse<boolean>>data));
-  }
+  // logout(logoutRequest: LogoutRequest) : Observable<BaseResponse<boolean>> {
+  //   encryptStorage.clear();
+  //         this.router.navigate(['login']);
+  //   const uri = `${this.baseAPIUrl}/authenticator/LogOut`;
+  //   return this.http
+  //   .post<BaseResponse<boolean>>(uri, logoutRequest)
+  //   .pipe(map((data) => <BaseResponse<boolean>>data));
+  // }
   refreshAccessToken(
     refreshTokenRequest: RefreshTokenRequest
   ): Observable<BaseResponse<RefreshTokenResponse>> {

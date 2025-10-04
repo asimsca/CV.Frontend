@@ -14,7 +14,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
   isLoginSuccessful = false;
@@ -37,13 +37,13 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
-  ngOnInit(): void {
-    ;
-    const tokenValue = this.authenticationService.JwtToken;
-    if (tokenValue) {
-      this.router.navigate(['home']);
-    }
-  }
+  // ngOnInit(): void {
+  //   ;
+  //   const tokenValue = this.authenticationService.JwtToken;
+  //   if (tokenValue) {
+  //     this.router.navigate(['home']);
+  //   }
+  // }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName);
@@ -74,7 +74,8 @@ export class LoginComponent implements OnInit {
           this.authenticationService.JwtToken = resp.data.accessToken;
           this.authenticationService.refreshToken = resp.data.refreshToken;
           // this.authenticationService.setMenuItems(resp.data.menuItems);
-          this.router.navigate(['home']);          
+          this.router.navigate(['home']);
+              this.sweetAlertService.showSuccess("Success", resp.message)          
       } else {
         this.sweetAlertService.showError('Failed',resp.message);
       }

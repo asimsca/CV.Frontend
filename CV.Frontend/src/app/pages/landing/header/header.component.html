@@ -14,7 +14,8 @@
         </div>
 
         <div class="nav-actions">
-          <button class="btn btn-outline-primary" [routerLink]="['/auth']">Sign In</button>
+          <button class="btn btn-outline-primary" [routerLink]="['/auth']" *ngIf="!isUserLoggedin">Sign In</button>
+          <button class="btn btn-outline-primary" (click)="logout()" *ngIf="isUserLoggedin">Logout</button>
           <!-- <button class="btn btn-primary">Get Started</button> -->
           <button class="mobile-menu-btn" (click)="toggleMenu()">
             <span></span>

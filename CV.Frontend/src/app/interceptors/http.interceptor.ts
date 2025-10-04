@@ -140,8 +140,9 @@ private Logout(){
   let logoutRequest :LogoutRequest={
     sessionId:"1"
   }
-  this.authService.logout(logoutRequest).subscribe((resp) => {
-  });
+  // this.authService.logout(logoutRequest).subscribe((resp) => {
+  // });
+  this.authService.logout();
 }
   private addTokenToRequest(
     request: HttpRequest<any>,
