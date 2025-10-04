@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../../auth/login/login.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +10,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
+
+  constructor(private ngbModal: NgbModal) { }
+  categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
   activeCategory = 'All';
 
   templates = [
@@ -18,8 +24,8 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath : 'assets/templatesImages/1.jpg',
-      route: '/testCV2' 
+      mockImagePath: 'assets/templatesImages/1.jpg',
+      route: '/testCV2'
     },
     {
       id: 2,
@@ -29,7 +35,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath : 'assets/templatesImages/2.jpg'
+      mockImagePath: 'assets/templatesImages/2.jpg'
     },
     {
       id: 3,
@@ -39,7 +45,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'creative',
       atsOptimized: false,
       popular: true,
-      mockImagePath : 'assets/templatesImages/3.png'
+      mockImagePath: 'assets/templatesImages/3.png'
     },
     {
       id: 4,
@@ -49,7 +55,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath : 'assets/templatesImages/4.jpg'
+      mockImagePath: 'assets/templatesImages/4.jpg'
     },
     {
       id: 5,
@@ -59,7 +65,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'modern',
       atsOptimized: true,
       popular: true,
-      mockImagePath : 'assets/templatesImages/7.png'
+      mockImagePath: 'assets/templatesImages/7.png'
     },
     {
       id: 6,
@@ -69,7 +75,7 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       style: 'minimal',
       atsOptimized: true,
       popular: false,
-      mockImagePath : 'assets/templatesImages/6.jpg'
+      mockImagePath: 'assets/templatesImages/6.jpg'
     }
   ];
 
@@ -139,5 +145,30 @@ categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
       role: 'Product Designer'
     }
   ];
+
+  useTemplate() {
+
+    this.ngbModal.open(LoginComponent, {
+      centered: true,
+      backdrop: true,   // allow outside click close to not allow then make value 'static'
+      keyboard: true,   // allow ESC key close , to not allow then false
+      size: 'lg',
+      
+
+    }).result.then(
+      (result: any) => {
+        if (result?.message === 'Biometric Performed') {
+        }
+        else {
+
+        }
+      },
+      (reason) => {
+        // ✅ This block runs when modal is closed by ESC or outside click
+        console.log('Modal dismissed:', reason);
+      }
+    );
+  }
+
 
 }

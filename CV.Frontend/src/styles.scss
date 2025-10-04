@@ -198,3 +198,10 @@ textarea:focus {
 .loading {
   animation: spin 1s linear infinite;
 }
+
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+.modal {
+  z-index: 1055 !important;
+}

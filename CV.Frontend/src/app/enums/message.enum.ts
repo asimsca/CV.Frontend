@@ -1,4 +1,5 @@
 export enum MessageEnum{
     dashboardShowSubHeader = "dashboardShowSubHeader",
-    dashboardSubHeaderTitle = "dashboardSubHeaderTitle"
+    dashboardSubHeaderTitle = "dashboardSubHeaderTitle",
+    loginSuccess = "loginSuccess"
 }

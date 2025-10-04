@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,12 +9,15 @@ import { CommonService } from 'src/app/services/common/common.service';
 import { SweetAlertService } from 'src/app/shared/services/sweet-alert.service';
 import { RegexPatterns } from 'src/app/validators/regex-patterns';
 import { environment } from '../../../../environments/environment';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MessageEnum } from 'src/app/enums/message.enum';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+    @Input() data: any;
   loginForm: FormGroup;
   errorMessage = '';
   isLoginSuccessful = false;
@@ -31,6 +34,7 @@ export class LoginComponent {
     private authenticationService: AuthenticationService,
     private commonService: CommonService,
     private sweetAlertService:SweetAlertService,
+    public activeModal: NgbActiveModal
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -75,7 +79,9 @@ export class LoginComponent {
           this.authenticationService.refreshToken = resp.data.refreshToken;
           // this.authenticationService.setMenuItems(resp.data.menuItems);
           this.router.navigate(['home']);
-              this.sweetAlertService.showSuccess("Success", resp.message)          
+              this.sweetAlertService.showSuccess("Success", resp.message)  ;
+                  this.activeModal.close({ message: MessageEnum.loginSuccess });
+        
       } else {
         this.sweetAlertService.showError('Failed',resp.message);
       }
