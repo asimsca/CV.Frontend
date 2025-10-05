@@ -18,10 +18,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [{
   path: '',
-  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_angular_forms_fesm2022_forms_mjs"), __webpack_require__.e("src_app_pages_landing_landing_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/landing/landing.module */ 8510)).then(mod => mod.LandingModule)
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_auth_login_login_component_ts"), __webpack_require__.e("src_app_pages_landing_landing_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/landing/landing.module */ 8510)).then(mod => mod.LandingModule)
 }, {
   path: 'auth',
-  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_angular_forms_fesm2022_forms_mjs"), __webpack_require__.e("src_app_pages_auth_auth_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/auth/auth.module */ 8472)).then(mod => mod.AuthModule)
+  loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pages_auth_login_login_component_ts"), __webpack_require__.e("src_app_pages_auth_auth_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/auth/auth.module */ 8472)).then(mod => mod.AuthModule)
 }, {
   path: 'admin',
   loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_admin_admin_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/admin/admin.module */ 7830)).then(mod => mod.AdminModule)
@@ -39,7 +39,9 @@ class AppRoutingModule {
   }
   static {
     this.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
-      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterModule.forRoot(routes), _angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterModule]
+      imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterModule.forRoot(routes, {
+        scrollPositionRestoration: 'top' // always scroll to top when navigate to another component
+      }), _angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterModule]
     });
   }
 }
@@ -168,6 +170,7 @@ var MessageEnum;
 (function (MessageEnum) {
   MessageEnum["dashboardShowSubHeader"] = "dashboardShowSubHeader";
   MessageEnum["dashboardSubHeaderTitle"] = "dashboardSubHeaderTitle";
+  MessageEnum["loginSuccess"] = "loginSuccess";
 })(MessageEnum || (MessageEnum = {}));
 
 /***/ }),
@@ -286,7 +289,9 @@ class HttpInterceptor {
     let logoutRequest = {
       sessionId: "1"
     };
-    this.authService.logout(logoutRequest).subscribe(resp => {});
+    // this.authService.logout(logoutRequest).subscribe((resp) => {
+    // });
+    this.authService.logout();
   }
   addTokenToRequest(request, token, isReplay) {
     return request.clone({
@@ -374,7 +379,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const encryptStorage = new encrypt_storage__WEBPACK_IMPORTED_MODULE_1__.EncryptStorage('dU0OlV5B7xMu9g33uP1DMPoqKGBUhROw', {
-  prefix: '@coinEnginePortal'
+  prefix: '@cvPortal'
 });
 class AuthenticationService {
   constructor(http, router) {
@@ -389,25 +394,32 @@ class AuthenticationService {
       let token = this.JwtToken;
       if (token == '') {
         // you can update this as per your key
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth']);
       }
     }
   }
   get refreshToken() {
-    return encryptStorage.getItem('coinEngineRefreshToken') ?? '';
+    return encryptStorage.getItem('cvRefreshToken') ?? '';
   }
   set refreshToken(token) {
-    encryptStorage.setItem('coinEngineRefreshToken', token);
+    encryptStorage.setItem('cvRefreshToken', token);
   }
   get JwtToken() {
-    return encryptStorage.getItem('coinEngineJwtToken') ?? '';
+    return encryptStorage.getItem('cvJwtToken') ?? '';
   }
   set JwtToken(token) {
-    encryptStorage.setItem('coinEngineJwtToken', token);
+    encryptStorage.setItem('cvJwtToken', token);
   }
   get getRetailerInfo() {
     return JSON.parse(localStorage.getItem('retailerInfo') || '{}');
   }
+  logout() {
+    debugger;
+    // encryptStorage.removeItem('cvJwtToken');
+    encryptStorage.clear();
+    // this.router.navigate(['/auth']);
+  }
+
   setMenuItems(menuItems) {
     let objItem = {
       menuId: 111,
@@ -421,7 +433,7 @@ class AuthenticationService {
       children: []
     };
     menuItems.unshift(objItem);
-    localStorage.setItem('coinEngineMenuItems', JSON.stringify(menuItems));
+    localStorage.setItem('cvMenuItems', JSON.stringify(menuItems));
   }
   /**
    * Get Object having specific key
@@ -448,12 +460,14 @@ class AuthenticationService {
     const uri = `${this.baseAPIUrl}/login/AuthorizeOTP`;
     return this.http.post(uri, authorizeOTPRequest).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(data => data));
   }
-  logout(logoutRequest) {
-    encryptStorage.clear();
-    this.router.navigate(['login']);
-    const uri = `${this.baseAPIUrl}/authenticator/LogOut`;
-    return this.http.post(uri, logoutRequest).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(data => data));
-  }
+  // logout(logoutRequest: LogoutRequest) : Observable<BaseResponse<boolean>> {
+  //   encryptStorage.clear();
+  //         this.router.navigate(['login']);
+  //   const uri = `${this.baseAPIUrl}/authenticator/LogOut`;
+  //   return this.http
+  //   .post<BaseResponse<boolean>>(uri, logoutRequest)
+  //   .pipe(map((data) => <BaseResponse<boolean>>data));
+  // }
   refreshAccessToken(refreshTokenRequest) {
     const uri = `${this.baseAPIUrl}/authenticator/refresh`;
     return this.http.post(uri, refreshTokenRequest).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(data => data));
@@ -602,6 +616,16 @@ class SweetAlertService {
       icon: 'success',
       title: title,
       text: text
+    });
+  }
+  downloadSucces(title = 'Download Success', text = 'Click below to download your file.', confirmButtonText = 'Yes, Download it!', cancelButtonText = 'No, cancel it!') {
+    return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+      title: title,
+      text: text,
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText,
+      cancelButtonText: cancelButtonText
     });
   }
   showError(title, text = '') {
