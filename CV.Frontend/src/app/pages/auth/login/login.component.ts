@@ -17,8 +17,9 @@ import { MessageEnum } from 'src/app/enums/message.enum';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-    @Input() data: any;
+  @Input() data: any;
   loginForm: FormGroup;
+  registerForm: FormGroup;
   errorMessage = '';
   isLoginSuccessful = false;
   isOTPEnabled: boolean = false;
@@ -27,17 +28,25 @@ export class LoginComponent {
   passwordRegex = '';
   loginResponse!: LoginResponse;
   msg: string = '';
+  showLoginSection = true;
+  showRegisterSection = false;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
     private commonService: CommonService,
-    private sweetAlertService:SweetAlertService,
+    private sweetAlertService: SweetAlertService,
     public activeModal: NgbActiveModal
   ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern(RegexPatterns.emailPattern)]],
+      password: ['', [Validators.required]],
+    });
+
+    this.registerForm = this.formBuilder.group({
+      fullName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern(RegexPatterns.emailPattern)]],
       password: ['', [Validators.required]],
     });
   }
@@ -66,25 +75,37 @@ export class LoginComponent {
     this.errorMessage = '';
 
     let loginObj: LoginRequest = {
-      userName: this.loginForm.controls['username'].value,
+      email: this.loginForm.controls['email'].value,
       password: this.loginForm.controls['password'].value,
     };
 
     this.authenticationService.login(loginObj).subscribe((resp) => {
       if (resp.isSuccess) {
         this.loginResponse = resp.data;
-          //in case of OTP disbaled
-          this.isLoginSuccessful = resp.isSuccess;
-          this.authenticationService.JwtToken = resp.data.accessToken;
-          this.authenticationService.refreshToken = resp.data.refreshToken;
-          // this.authenticationService.setMenuItems(resp.data.menuItems);
-          this.router.navigate(['home']);
-              this.sweetAlertService.showSuccess("Success", resp.message)  ;
-                  this.activeModal.close({ message: MessageEnum.loginSuccess });
-        
+        //in case of OTP disbaled
+        this.isLoginSuccessful = resp.isSuccess;
+        this.authenticationService.JwtToken = resp.data.accessToken;
+        this.authenticationService.refreshToken = resp.data.refreshToken;
+        // this.authenticationService.setMenuItems(resp.data.menuItems);
+        this.router.navigate(['home']);
+        this.sweetAlertService.showSuccess("Success", resp.message);
+        this.activeModal.close({ message: MessageEnum.loginSuccess });
+
       } else {
-        this.sweetAlertService.showError('Failed',resp.message);
+        this.sweetAlertService.showError('Failed', resp.message);
       }
     });
+  }
+
+  showRegisterForm() {
+    this.showLoginSection = false;
+    this.loginForm.reset();
+    this.showRegisterSection = true;
+  }
+
+  showLoginForm() {
+    this.showLoginSection = true;
+    this.registerForm.reset();
+    this.showRegisterSection = false;
   }
 }

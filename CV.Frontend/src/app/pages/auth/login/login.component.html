@@ -1,69 +1,168 @@
-        <div class="account-pages"> <!--add pt-sm-5 class to have some padding of login form--> 
-            <div class="">
-                <div class="row justify-content-center">
-                    <div class="col-md-12 col-lg-12 col-xl-12">
-                        <div class="card overflow-hidden">
-                            <div class="bg-soft-primary">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <div class="text-primary p-4">
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p>Sign in to continue making CV</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 align-self-end">
-                                        <img src="assets/images/profile-img.png" alt="" class="img-fluid">
-                                    </div>
+<div class="account-pages" *ngIf="showLoginSection"> <!--add pt-sm-5 class to have some padding of login form-->
+    <div class="">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="card overflow-hidden">
+                    <div class="bg-soft-primary">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="text-primary p-4">
+                                    <h5 class="text-primary">Login</h5>
+                                    <p>Sign in to continue making CV</p>
                                 </div>
                             </div>
-                            <div class="card-body pt-0"> 
-                                <form [formGroup]="loginForm">
-                                <div>
-                                    <a href="index.html">
-                                        <div class="avatar-md profile-user-wid mb-4">
-                                            <span class="avatar-title rounded-circle bg-light">
-                                                <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="p-2">
-                                    <!-- <form class="form-horizontal" action="index.html"> -->
-        
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control" formControlName="username" placeholder="Enter username">
-                                        </div>
-                
-                                        <div class="form-group">
-                                            <label for="userpassword">Password</label>
-                                            <input type="password" class="form-control" formControlName="password" placeholder="Enter password">
-                                        </div>
-                
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                            <label class="custom-control-label" for="customControlInline">Remember me</label>
-                                        </div>
-                                        
-                                        <div class="mt-3">
-                                            <button class="btn btn-primary btn-block waves-effect waves-light" [disabled]="!loginForm.valid" *ngIf="!isLoginSuccessful && !isOTPEnabled" type="submit"  (click)="onSubmit()">Log In</button>
-
-
-                                        </div>
-            
-                                        <div class="mt-4 text-center">
-                                            <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot your password?</a>
-                                        </div>
-                                    <!-- </form> -->
-                                </div>
-                                </form>
+                            <div class="col-5 align-self-end">
+                                <img src="assets/images/profile-img.png" alt="" class="img-fluid">
                             </div>
                         </div>
-                        <div class="mt-5 text-center">
-                            <p>Don't have an account ? <a href="auth-register.html" class="font-weight-medium text-primary"> Signup now </a> </p>
-                        </div>
+                    </div>
+                    <div class="card-body pt-0">
+                        <form [formGroup]="loginForm">
+                            <div>
+                                <a href="index.html">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-2">
+                                <!-- <form class="form-horizontal" action="index.html"> -->
 
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" formControlName="email"
+                                        placeholder="Enter email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="userpassword">Password</label>
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="Enter password">
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                    <label class="custom-control-label" for="customControlInline">Remember me</label>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="btn btn-primary btn-block waves-effect waves-light"
+                                        [disabled]="!loginForm.valid" *ngIf="!isLoginSuccessful && !isOTPEnabled"
+                                        type="submit" (click)="onSubmit()">Log In</button>
+
+
+                                </div>
+
+                                <div class="mt-4 text-center">
+                                    <a href="" class="text-muted"><i class="mdi mdi-lock mr-1"></i>
+                                        Forgot your password?</a>
+                                </div>
+                                <!-- </form> -->
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <div class="mt-5 text-center">
+                    <p>
+                        Don't have an account?
+                        <a (click)="showRegisterForm()" class="font-weight-medium text-primary" style="cursor:pointer;">
+                            Signup now
+                        </a>
+                    </p>
+                </div>
+
             </div>
         </div>
+    </div>
+</div>
+
+
+<!-- register section -->
+
+<div class="account-pages" *ngIf="showRegisterSection"> <!--add pt-sm-5 class to have some padding of login form-->
+    <div class="">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="card overflow-hidden">
+                    <div class="bg-soft-primary">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="text-primary p-4">
+                                    <h5 class="text-primary">Register</h5>
+                                    <p>Get your free cv builder account.</p>
+                                </div>
+                            </div>
+                            <div class="col-5 align-self-end">
+                                <img src="assets/images/profile-img.png" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0">
+                        <form [formGroup]="registerForm">
+                            <div>
+                                <a href="index.html">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-2">
+                                <!-- <form class="form-horizontal" action="index.html"> -->
+
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" formControlName="fullName"
+                                        placeholder="Enter full name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" formControlName="email"
+                                        placeholder="Enter email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="userpassword">Password</label>
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="Enter password">
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                    <label class="custom-control-label" for="customControlInline">Remember me</label>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="btn btn-primary btn-block waves-effect waves-light"
+                                        [disabled]="!registerForm.valid"
+                                        type="submit" (click)="onSubmit()">Register</button>
+
+
+                                </div>
+
+                                <div class="mt-4 text-center">
+                                    <a href="" class="text-muted"><i class="mdi mdi-lock mr-1"></i>
+                                        Forgot your password?</a>
+                                </div>
+                                <!-- </form> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <p>
+                        Already have an account ?
+                        <a (click)="showLoginForm()" class="font-weight-medium text-primary" style="cursor:pointer;">
+                            Login here
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
