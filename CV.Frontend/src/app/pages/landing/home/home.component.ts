@@ -152,7 +152,7 @@ export class HomeComponent {
       centered: true,
       backdrop: true,   // allow outside click close to not allow then make value 'static'
       keyboard: true,   // allow ESC key close , to not allow then false
-      size: 'lg',
+      size: 'md',
       
 
     }).result.then(
