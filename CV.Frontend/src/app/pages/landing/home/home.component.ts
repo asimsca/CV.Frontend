@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../../auth/login/login.component';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,8 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class HomeComponent {
 
-  constructor(private ngbModal: NgbModal) { }
+  constructor(private ngbModal: NgbModal, private authService: AuthenticationService,     private router: Router
+  ) { }
   categories = ['All', 'Modern', 'Minimal', 'Creative', 'Executive'];
   activeCategory = 'All';
 
@@ -147,27 +150,34 @@ export class HomeComponent {
   ];
 
   useTemplate() {
+debugger;
+    const tokenValue = this.authService.JwtToken;
+    // if user is not logged in then login first
+    if (!tokenValue) {
+      this.ngbModal.open(LoginComponent, {
+        centered: true,
+        backdrop: true,   // allow outside click close to not allow then make value 'static'
+        keyboard: true,   // allow ESC key close , to not allow then false
+        size: 'md',
 
-    this.ngbModal.open(LoginComponent, {
-      centered: true,
-      backdrop: true,   // allow outside click close to not allow then make value 'static'
-      keyboard: true,   // allow ESC key close , to not allow then false
-      size: 'md',
-      
 
-    }).result.then(
-      (result: any) => {
-        if (result?.message === 'Biometric Performed') {
+      }).result.then(
+        (result: any) => {
+          if (result?.message === 'Biometric Performed') {
+          }
+          else {
+
+          }
+        },
+        (reason) => {
+          // ✅ This block runs when modal is closed by ESC or outside click
+          console.log('Modal dismissed:', reason);
         }
-        else {
-
-        }
-      },
-      (reason) => {
-        // ✅ This block runs when modal is closed by ESC or outside click
-        console.log('Modal dismissed:', reason);
-      }
-    );
+      );
+    }
+    else{
+          this.router.navigate(['testCV2']);
+    }
   }
 
 
