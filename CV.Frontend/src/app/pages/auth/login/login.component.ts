@@ -11,6 +11,7 @@ import { RegexPatterns } from 'src/app/validators/regex-patterns';
 import { environment } from '../../../../environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageEnum } from 'src/app/enums/message.enum';
+import { RegisterRequest } from 'src/app/models/dto/request/user-management/register-request';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -108,4 +109,26 @@ export class LoginComponent {
     this.registerForm.reset();
     this.showRegisterSection = false;
   }
+
+
+  onRegister() {
+
+    this.errorMessage = '';
+
+    let obj: RegisterRequest = {
+      fullName: this.registerForm.controls['fullName'].value,
+      email: this.registerForm.controls['email'].value,
+      password: this.registerForm.controls['password'].value,
+    };
+
+    this.authenticationService.register(obj).subscribe((resp) => {
+      if (resp.isSuccess) {
+        this.sweetAlertService.showSuccess("Success", resp.message);
+        this.showLoginForm();
+      } else {
+        this.sweetAlertService.showError('Failed', resp.message);
+      }
+    });
+  }
+
 }

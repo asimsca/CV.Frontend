@@ -17,6 +17,7 @@ import { BaseResponse } from 'src/app/models/base-response';
 import { ValidateOtpRequestDto } from 'src/app/models/dto/request/user-management/validate-otp-request';
 import { ResetPasswordRequestDto } from 'src/app/models/dto/request/user-management/reset-password-request';
 import { LogoutRequest } from 'src/app/models/dto/request/user-management/logout-request';
+import { RegisterRequest } from 'src/app/models/dto/request/user-management/register-request';
 export const encryptStorage = new EncryptStorage(
   'dU0OlV5B7xMu9g33uP1DMPoqKGBUhROw',
   {
@@ -68,7 +69,7 @@ export class AuthenticationService {
     debugger;
     // encryptStorage.removeItem('cvJwtToken');
     encryptStorage.clear();
-    // this.router.navigate(['/auth']);
+    this.router.navigate(['home']);
   }
 
   setMenuItems(menuItems: MenuItems[]) {
@@ -114,6 +115,15 @@ export class AuthenticationService {
     return this.http
       .post<BaseResponse<LoginResponse>>(uri, loginRequest)
       .pipe(map((data) => <BaseResponse<LoginResponse>>data));
+  }
+
+  register(
+    request: RegisterRequest
+  ): Observable<BaseResponse<string>> {
+    const uri = `${this.baseAPIUrl}/Auth/Register`;
+    return this.http
+      .post<BaseResponse<string>>(uri, request)
+      .pipe(map((data) => <BaseResponse<string>>data));
   }
 
   authorizeOTP(
