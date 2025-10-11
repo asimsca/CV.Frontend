@@ -132,7 +132,7 @@ export class TestCV2Component implements OnInit {
           // 3) Call AddCV with updated form
           this.callAddCvApi();
         } else {
-          alert("❌ Image upload failed: " + uploadResp.message);
+          this.sweetAlert.showError('Failure', 'Image upload failed: ' + uploadResp.message);
         }
       });
     } else {
@@ -186,7 +186,7 @@ export class TestCV2Component implements OnInit {
         this.isEditing = false;
       }
       else {
-        alert('CV failed! ' + response.message);
+            this.sweetAlert.showError('Failure', 'Image upload failed: ' + response.message);
       }
     })
 
