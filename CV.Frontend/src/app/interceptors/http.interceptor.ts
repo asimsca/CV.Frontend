@@ -149,9 +149,10 @@ private Logout(){
     token: string,
     isReplay: boolean
   ): HttpRequest<any> {
+    debugger;
     return request.clone({
       setHeaders: {
-        Authorization: 'Bearer ${token}',
+      Authorization: `Bearer ${token}`,
         Platform: '1',
         UUID: this.UUID,
       },
